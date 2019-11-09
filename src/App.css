@@ -1,4 +1,3 @@
-
 .App {
   text-align: center;
 }
@@ -9,13 +8,12 @@
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
-
 }
 
 .FruitContainer {
   width: 14rem;
   border: 1px solid black;
-  margin: .2rem;
+  margin: 0.2rem;
 }
 
 .PriceContainer {

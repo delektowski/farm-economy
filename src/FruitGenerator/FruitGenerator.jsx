@@ -1,30 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { fruitFactory } from "../FruitFactory/FruitFactory";
 import FruitContainer from "../FruitContainer/FruitContainer";
 
 const FruitGenerator = () => {
   const [fruitList, setFruitList] = useState(fruitFactory);
-  useEffect(
-    () => {
-      console.log('kokos')
-    },
-    [fruitList]
-  )
+
   const handleChangePrice = (fruitName, newPrice) => {
     const changedFruitList = fruitList.map(fruit => {
       const fruitCopy = { ...fruit };
       if (fruitCopy.fruitName === fruitName) {
-        fruitCopy.fruitProfit = getProfitPerHour(
-          fruitCopy.fruitCroppingTime,
-          newPrice,
-          fruitCopy.fruitCrop
-        );
+        fruitCopy.fruitPrice = newPrice;
       }
       return fruitCopy;
     });
-    console.log("changedFruitList", changedFruitList)
     setFruitList(changedFruitList);
   };
+
   const getProfitPerHour = (fruitCroppingTime, fruitPrice, fruitCrop) => {
     const hourMultiplier = fruitCroppingTime / 60;
     return ((fruitPrice * fruitCrop) / hourMultiplier).toFixed(2);
@@ -56,24 +47,26 @@ const FruitGenerator = () => {
     });
   };
 
-  return (<div>
-    <h1 style={{textAlign: "center"}}>Ocena zyskowności kwiatuszkowych inwestycji działkowych</h1>
-    <div className="AppContainer">
-      
-      {sortedFruitsAndProfit().map(fruit => {
-        return (
-          <FruitContainer
-            key={fruit.fruitName}
-            fruitName={fruit.fruitName}
-            fruitPrice={fruit.fruitPrice}
-            fruitCrop={fruit.fruitCrop}
-            fruitCroppingTime={fruit.fruitCroppingTime}
-            fruitProfit={fruit.profit}
-            handleChangePrice={handleChangePrice}
-          />
-        );
-      })}
-    </div>
+  return (
+    <div>
+      <h1 style={{ textAlign: "center" }}>
+        Ocena zyskowności kwiatuszkowych inwestycji działkowych
+      </h1>
+      <div className="AppContainer">
+        {sortedFruitsAndProfit().map(fruit => {
+          return (
+            <FruitContainer
+              key={fruit.fruitName}
+              fruitName={fruit.fruitName}
+              fruitPrice={fruit.fruitPrice}
+              fruitCrop={fruit.fruitCrop}
+              fruitCroppingTime={fruit.fruitCroppingTime}
+              sortedFruitProfit={fruit.profit}
+              handleChangePrice={handleChangePrice}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

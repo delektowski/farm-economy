@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const FruitContainer = ({
   fruitName,
   fruitPrice,
   fruitCrop,
-  fruitCroppingTime
+  fruitCroppingTime,
+  sortedFruitProfit,
+  handleChangePrice
 }) => {
   const [price, setPrice] = useState(fruitPrice);
+  const [fruitProfit, setFruitProfit] = useState(sortedFruitProfit);
 
-  const getProfitPerHour = () => {
+  const getProfitPerHour = fruitPrice => {
     const hourMultiplier = fruitCroppingTime / 60;
-    return ((price * fruitCrop) / hourMultiplier).toFixed(2);
+    return +((fruitPrice * fruitCrop) / hourMultiplier).toFixed(2);
   };
 
   const getCroppingTimeHoursAndMinute = () => {
@@ -19,9 +22,23 @@ const FruitContainer = ({
     return `${hours}h ${minutes}m`;
   };
 
-  const handlePrice = event => {
-    setPrice(event.target.value);
+  const handlePrice = e => {
+    setPrice(e.target.value);
   };
+
+  const handleChangeProfit = e => {
+    if (e.key === "Enter") {
+      handleChangePrice(fruitName, event.target.value);
+    }
+  };
+
+  useEffect(() => {
+    setFruitProfit(getProfitPerHour(price));
+  }, [price]);
+
+  useEffect(() => {
+    setFruitProfit(sortedFruitProfit);
+  }, [sortedFruitProfit]);
 
   return (
     <div className="App">
@@ -35,7 +52,7 @@ const FruitContainer = ({
           {`${fruitCrop} sztuki`}
         </p>
 
-        <form className="PriceContainer">
+        <div className="PriceContainer">
           <div className="CurrencyFieldContainer">
             <label htmlFor="strawberryTime">
               <strong>Cena za owoc</strong>{" "}
@@ -47,14 +64,15 @@ const FruitContainer = ({
               type="number"
               value={price}
               onChange={handlePrice}
+              onKeyUp={handleChangeProfit}
             ></input>
             <p>zł</p>
           </div>
-        </form>
+        </div>
 
         <p>
           <strong>Zysk na godzinę: </strong>
-          {getProfitPerHour()} zł
+          {fruitProfit} zł
         </p>
       </section>
     </div>
