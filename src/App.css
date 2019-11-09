@@ -30,6 +30,10 @@
   height: 1rem;
 }
 
+.Focused {
+  background: rgba(125, 187, 125, 0.884);
+}
+
 .CurrencyFieldContainer {
   display: flex;
   flex-direction: row;

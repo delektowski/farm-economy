@@ -10,6 +10,7 @@ const FruitContainer = ({
 }) => {
   const [price, setPrice] = useState(fruitPrice);
   const [fruitProfit, setFruitProfit] = useState(sortedFruitProfit);
+  const [isFocus, setIsFocus] = useState(false);
 
   const getProfitPerHour = fruitPrice => {
     const hourMultiplier = fruitCroppingTime / 60;
@@ -23,13 +24,22 @@ const FruitContainer = ({
   };
 
   const handlePrice = e => {
-    setPrice(e.target.value);
+    const newPrice = e.target.value;
+    setPrice(newPrice);
   };
 
   const handleChangeProfit = e => {
     if (e.key === "Enter") {
       handleChangePrice(fruitName, event.target.value);
     }
+  };
+
+  const handleOnFocus = e => {
+    setIsFocus(true);
+  };
+
+  const handleOnBlur = e => {
+    setIsFocus(false);
   };
 
   useEffect(() => {
@@ -42,39 +52,55 @@ const FruitContainer = ({
 
   return (
     <div className="App">
-      <section className="FruitContainer">
-        <h2>{fruitName}</h2>
-        <p>
-          <strong>Czas uprawy: </strong> {getCroppingTimeHoursAndMinute()}
-        </p>
-        <p>
-          <strong>Plon: </strong>
-          {`${fruitCrop} sztuki`}
-        </p>
+      <label htmlFor={fruitName}>
+        <section
+          className={
+            isFocus
+              ? ["FruitContainer", "Focused"].join(" ")
+              : ["FruitContainer"]
+          }
+        >
+          <h2>{fruitName}</h2>
+          <p>
+            <strong>Czas uprawy: </strong> {getCroppingTimeHoursAndMinute()}
+          </p>
+          <p>
+            <strong>Plon: </strong>
+            {`${fruitCrop} sztuk`}
+          </p>
 
-        <div className="PriceContainer">
-          <div className="CurrencyFieldContainer">
-            <label htmlFor="strawberryTime">
-              <strong>Cena za owoc</strong>{" "}
-            </label>
-            <input
-              placeholder="cena"
-              className="PriceField"
-              id="strawberryTime"
-              type="number"
-              value={price}
-              onChange={handlePrice}
-              onKeyUp={handleChangeProfit}
-            ></input>
-            <p>zł</p>
+          <div className="PriceContainer">
+            <div className="CurrencyFieldContainer">
+              <p>
+                <strong>Cena za sztukę</strong>{" "}
+              </p>
+              <input
+                id={fruitName}
+                placeholder="cena"
+                className="PriceField"
+                type="number"
+                value={price}
+                onChange={handlePrice}
+                onKeyUp={handleChangeProfit}
+                onFocus={handleOnFocus}
+                onBlur={handleOnBlur}
+                min="0"
+                max="999999"
+                step="0.10"
+              />
+              <p>zł</p>
+            </div>
           </div>
-        </div>
-
-        <p>
-          <strong>Zysk na godzinę: </strong>
-          {fruitProfit} zł
-        </p>
-      </section>
+          <p>
+            <strong>Zysk na godzinę: </strong>
+            {fruitProfit} zł
+          </p>
+          <p>
+            <strong>Zysk z plonu: </strong>
+            {(fruitPrice * fruitCrop).toFixed(2)} zł
+          </p>
+        </section>
+      </label>
     </div>
   );
 };
