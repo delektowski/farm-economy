@@ -65,7 +65,7 @@ const FruitContainer = ({
     }
   };
   return (
-    <div className="App">
+    <div>
       <label htmlFor={fruitName}>
         <section
           className={
