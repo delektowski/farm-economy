@@ -89,5 +89,29 @@ export const fruitFactory = [
     fruitCrop: 4,
     fruitPrice: 2
   },
+  {
+    fruitName: "Jeżyna",
+    fruitCroppingTime: 2880,
+    fruitCrop: 3,
+    fruitPrice: 28.50
+  },
+  {
+    fruitName: "Porzeczka",
+    fruitCroppingTime: 2160,
+    fruitCrop: 6,
+    fruitPrice: 6.4
+  },
+  {
+    fruitName: "Rzodkiewka",
+    fruitCroppingTime: 50,
+    fruitCrop: 3,
+    fruitPrice: 0.24
+  },
+  {
+    fruitName: "Ogórek",
+    fruitCroppingTime: 40,
+    fruitCrop: 4,
+    fruitPrice: 0.14
+  },
  
 ];

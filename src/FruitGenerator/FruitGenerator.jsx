@@ -5,11 +5,11 @@ import FruitContainer from "../FruitContainer/FruitContainer";
 const FruitGenerator = () => {
   const [fruitList, setFruitList] = useState(fruitFactory);
 
-  const handleChangePrice = (fruitName, newPrice) => {
+  const handleChangeFruitProperty = (fruitName, newValue, property) => {
     const changedFruitList = fruitList.map(fruit => {
       const fruitCopy = { ...fruit };
       if (fruitCopy.fruitName === fruitName) {
-        fruitCopy.fruitPrice = newPrice;
+        fruitCopy[property] = newValue;
       }
       return fruitCopy;
     });
@@ -62,7 +62,7 @@ const FruitGenerator = () => {
               fruitCrop={fruit.fruitCrop}
               fruitCroppingTime={fruit.fruitCroppingTime}
               sortedFruitProfit={fruit.profit}
-              handleChangePrice={handleChangePrice}
+              handleChangeFruitProperty={handleChangeFruitProperty}
             />
           );
         })}

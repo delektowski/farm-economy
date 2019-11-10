@@ -6,20 +6,23 @@ const FruitContainer = ({
   fruitCrop,
   fruitCroppingTime,
   sortedFruitProfit,
-  handleChangePrice
+  handleChangeFruitProperty,
+
 }) => {
   const [price, setPrice] = useState(fruitPrice);
   const [fruitProfit, setFruitProfit] = useState(sortedFruitProfit);
+  const [croppingTime, setCroppingTime] = useState(fruitCroppingTime);
   const [isFocus, setIsFocus] = useState(false);
+  const [croppingTimeCheckboxFalse] = useState(fruitCroppingTime);
 
   const getProfitPerHour = fruitPrice => {
-    const hourMultiplier = fruitCroppingTime / 60;
+    const hourMultiplier = croppingTime / 60;
     return +((fruitPrice * fruitCrop) / hourMultiplier).toFixed(2);
   };
 
   const getCroppingTimeHoursAndMinute = () => {
-    const hours = Math.floor(fruitCroppingTime / 60);
-    const minutes = Math.ceil(fruitCroppingTime % 60);
+    const hours = Math.floor(croppingTime / 60);
+    const minutes = Math.ceil(croppingTime % 60);
     return `${hours}h ${minutes}m`;
   };
 
@@ -30,7 +33,7 @@ const FruitContainer = ({
 
   const handleChangeProfit = e => {
     if (e.key === "Enter") {
-      handleChangePrice(fruitName, event.target.value);
+      handleChangeFruitProperty(fruitName, event.target.value, "fruitPrice");
     }
   };
 
@@ -44,12 +47,23 @@ const FruitContainer = ({
 
   useEffect(() => {
     setFruitProfit(getProfitPerHour(price));
-  }, [price]);
+  }, [price, croppingTime]);
 
   useEffect(() => {
     setFruitProfit(sortedFruitProfit);
   }, [sortedFruitProfit]);
 
+  useEffect(() => {
+    handleChangeFruitProperty(fruitName, croppingTime, "fruitCroppingTime");
+  }, [croppingTime]);
+
+  const handleWateringCheckbox = e => {
+    if (e.target.checked) {
+      setCroppingTime(croppingTime - Math.ceil(croppingTime * 0.06));
+    } else {
+      setCroppingTime(croppingTimeCheckboxFalse);
+    }
+  };
   return (
     <div className="App">
       <label htmlFor={fruitName}>
@@ -72,7 +86,7 @@ const FruitContainer = ({
           <div className="PriceContainer">
             <div className="CurrencyFieldContainer">
               <p>
-                <strong>Cena za sztukę</strong>{" "}
+                <strong>Cena za sztukę</strong>
               </p>
               <input
                 id={fruitName}
@@ -91,13 +105,24 @@ const FruitContainer = ({
               <p>zł</p>
             </div>
           </div>
+          <div className="WateringCheckboxContainer">
+            <p>
+              <strong>Podlewanie</strong>
+            </p>
+            <input
+              type="checkbox"
+              onChange={handleWateringCheckbox}
+              onFocus={handleOnFocus}
+              onBlur={handleOnBlur}
+            />
+          </div>
           <p>
             <strong>Zysk na godzinę: </strong>
-            {fruitProfit} zł
+            {fruitProfit} kt
           </p>
           <p>
-            <strong>Zysk z plonu: </strong>
-            {(fruitPrice * fruitCrop).toFixed(2)} zł
+            <strong>Zysk z pola: </strong>
+            {(fruitPrice * fruitCrop).toFixed(2)} kt
           </p>
         </section>
       </label>
