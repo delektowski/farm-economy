@@ -7,7 +7,9 @@
     "react-dom": "^16.11.0",
     "react-scripts": "0.9.x"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "prettier": "^1.19.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

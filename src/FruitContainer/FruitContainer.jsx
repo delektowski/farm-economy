@@ -6,8 +6,7 @@ const FruitContainer = ({
   fruitCrop,
   fruitCroppingTime,
   sortedFruitProfit,
-  handleChangeFruitProperty,
-
+  handleChangeFruitProperty
 }) => {
   const [price, setPrice] = useState(fruitPrice);
   const [fruitProfit, setFruitProfit] = useState(sortedFruitProfit);
@@ -18,6 +17,12 @@ const FruitContainer = ({
   const getProfitPerHour = fruitPrice => {
     const hourMultiplier = croppingTime / 60;
     return +((fruitPrice * fruitCrop) / hourMultiplier).toFixed(2);
+  };
+
+  const getPriceByProfitPerHour = profitPerHour => {
+    const price = (profitPerHour * croppingTime) / 60 / fruitCrop;
+    console.log("price", price.toFixed(2));
+    setPrice(price.toFixed(2));
   };
 
   const getCroppingTimeHoursAndMinute = () => {
@@ -33,15 +38,21 @@ const FruitContainer = ({
 
   const handleChangeProfit = e => {
     if (e.key === "Enter") {
-      handleChangeFruitProperty(fruitName, event.target.value, "fruitPrice");
+      handleChangeFruitProperty(fruitName, e.target.value, "fruitPrice");
     }
   };
 
-  const handleOnFocus = e => {
+  const handleChangeSortingOnProfitChange = e => {
+    if (e.key === "Enter") {
+      handleChangeFruitProperty(fruitName, price, "fruitPrice");
+    }
+  };
+
+  const handleOnFocus = () => {
     setIsFocus(true);
   };
 
-  const handleOnBlur = e => {
+  const handleOnBlur = () => {
     setIsFocus(false);
   };
 
@@ -64,6 +75,12 @@ const FruitContainer = ({
       setCroppingTime(croppingTimeCheckboxFalse);
     }
   };
+
+  const handleProfitOnHour = e => {
+    setFruitProfit(e.target.value);
+    getPriceByProfitPerHour(e.target.value);
+  };
+
   return (
     <div>
       <label htmlFor={fruitName}>
@@ -82,7 +99,6 @@ const FruitContainer = ({
             <strong>Plon: </strong>
             {`${fruitCrop} sztuk`}
           </p>
-
           <div className="PriceContainer">
             <div className="CurrencyFieldContainer">
               <p>
@@ -102,7 +118,7 @@ const FruitContainer = ({
                 max="999999"
                 step="0.10"
               />
-              <p>zł</p>
+              <p>kt</p>
             </div>
           </div>
           <div className="WateringCheckboxContainer">
@@ -116,10 +132,23 @@ const FruitContainer = ({
               onBlur={handleOnBlur}
             />
           </div>
-          <p>
-            <strong>Zysk na godzinę: </strong>
-            {fruitProfit} kt
-          </p>
+          <div className="WateringCheckboxContainer">
+            <strong>Zysk na godzinę:</strong>
+            <input
+              value={fruitProfit}
+              type="number"
+              placeholder="zysk"
+              className="PriceField"
+              onChange={handleProfitOnHour}
+              onKeyUp={e => handleChangeSortingOnProfitChange(e)}
+              onFocus={handleOnFocus}
+              onBlur={handleOnBlur}
+              min="0"
+              max="999999"
+              step="0.10"
+            />
+            <p>kt</p>
+          </div>
           <p>
             <strong>Zysk z pola: </strong>
             {(fruitPrice * fruitCrop).toFixed(2)} kt

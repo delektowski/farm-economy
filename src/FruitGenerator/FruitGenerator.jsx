@@ -17,22 +17,21 @@ const FruitGenerator = () => {
   };
 
   const getProfitPerHour = (fruitCroppingTime, fruitPrice, fruitCrop) => {
-    const hourMultiplier = fruitCroppingTime / 60;
+    const hourMultiplier = fruitCroppingTime / 60; 
     return ((fruitPrice * fruitCrop) / hourMultiplier).toFixed(2);
   };
 
   const getSubtractionSum = (i, j) => {
     return (
-      getProfitPerHour(j.fruitCroppingTime, j.fruitPrice, j.fruitCrop) -
-      getProfitPerHour(i.fruitCroppingTime, i.fruitPrice, i.fruitCrop)
+        getProfitPerHour(j.fruitCroppingTime, j.fruitPrice, j.fruitCrop) -
+        getProfitPerHour(i.fruitCroppingTime, i.fruitPrice, i.fruitCrop)
     );
-  };
+  }
 
   const getSortedFruitsPerProfit = () => {
-    const sorted = fruitList.sort((i, j) => {
+    return fruitList.sort((i, j) => {
       return getSubtractionSum(i, j);
     });
-    return sorted;
   };
 
   const sortedFruitsAndProfit = () => {
