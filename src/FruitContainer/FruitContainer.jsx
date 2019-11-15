@@ -91,7 +91,7 @@ const FruitContainer = ({
               : ["FruitContainer"]
           }
         >
-          <h2>{fruitName}</h2>
+          <h2 className="Title">{fruitName}</h2>
           <p>
             <strong>Czas uprawy: </strong> {getCroppingTimeHoursAndMinute()}
           </p>
@@ -102,7 +102,7 @@ const FruitContainer = ({
           <div className="PriceContainer">
             <div className="CurrencyFieldContainer">
               <p>
-                <strong>Cena za sztukę</strong>
+                <strong>Cena za sztukę:</strong>
               </p>
               <input
                 id={fruitName}

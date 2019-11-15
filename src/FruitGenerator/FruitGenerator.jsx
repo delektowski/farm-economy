@@ -17,16 +17,16 @@ const FruitGenerator = () => {
   };
 
   const getProfitPerHour = (fruitCroppingTime, fruitPrice, fruitCrop) => {
-    const hourMultiplier = fruitCroppingTime / 60; 
+    const hourMultiplier = fruitCroppingTime / 60;
     return ((fruitPrice * fruitCrop) / hourMultiplier).toFixed(2);
   };
 
   const getSubtractionSum = (i, j) => {
     return (
-        getProfitPerHour(j.fruitCroppingTime, j.fruitPrice, j.fruitCrop) -
-        getProfitPerHour(i.fruitCroppingTime, i.fruitPrice, i.fruitCrop)
+      getProfitPerHour(j.fruitCroppingTime, j.fruitPrice, j.fruitCrop) -
+      getProfitPerHour(i.fruitCroppingTime, i.fruitPrice, i.fruitCrop)
     );
-  }
+  };
 
   const getSortedFruitsPerProfit = () => {
     return fruitList.sort((i, j) => {
@@ -48,7 +48,7 @@ const FruitGenerator = () => {
 
   return (
     <div>
-      <h1 style={{ textAlign: "center" }}>
+      <h1 className="Header">
         Ocena zyskowności kwiatuszkowych inwestycji działkowych
       </h1>
       <div className="AppContainer">
