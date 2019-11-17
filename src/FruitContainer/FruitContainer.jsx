@@ -6,7 +6,8 @@ const FruitContainer = ({
   fruitCrop,
   fruitCroppingTime,
   sortedFruitProfit,
-  handleChangeFruitProperty
+  handleChangeFruitProperty,
+  fieldMultiplier
 }) => {
   const [price, setPrice] = useState(fruitPrice);
   const [fruitProfit, setFruitProfit] = useState(sortedFruitProfit);
@@ -151,7 +152,7 @@ const FruitContainer = ({
           </div>
           <p>
             <strong>Zysk z pola: </strong>
-            {(fruitPrice * fruitCrop).toFixed(2)} kt
+            {(fruitPrice * fruitCrop * fieldMultiplier).toFixed(2)} kt
           </p>
         </section>
       </label>

@@ -60,6 +60,7 @@ const FruitGenerator = () => {
               fruitPrice={fruit.fruitPrice}
               fruitCrop={fruit.fruitCrop}
               fruitCroppingTime={fruit.fruitCroppingTime}
+              fieldMultiplier={fruit.fieldMultiplier}
               sortedFruitProfit={fruit.profit}
               handleChangeFruitProperty={handleChangeFruitProperty}
             />
