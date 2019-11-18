@@ -62,6 +62,9 @@ const FruitGenerator = () => {
               fruitCroppingTime={fruit.fruitCroppingTime}
               fieldMultiplier={fruit.fieldMultiplier}
               sortedFruitProfit={fruit.profit}
+              imgPositionX={fruit.positionX}
+              imgPositionY={fruit.positionY}
+
               handleChangeFruitProperty={handleChangeFruitProperty}
             />
           );
