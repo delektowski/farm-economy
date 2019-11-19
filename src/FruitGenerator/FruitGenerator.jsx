@@ -47,9 +47,9 @@ const FruitGenerator = () => {
   };
 
   return (
-    <div>
+    <div className="ContentContainer">
       <h1 className="Header">
-        Ocena zyskowności kwiatuszkowych inwestycji działkowych
+        Działkowe inwestycje
       </h1>
       <div className="AppContainer">
         {sortedFruitsAndProfit().map(fruit => {

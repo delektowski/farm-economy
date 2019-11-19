@@ -5,7 +5,7 @@ export const fruitFactory = [
         fruitCrop: 4,
         fruitPrice: 0.48,
         fieldMultiplier: 1,
-        positionX: '0%',
+        positionX: '20%',
         positionY: '0%'
     },
     {
@@ -14,8 +14,8 @@ export const fruitFactory = [
         fruitCrop: 4,
         fruitPrice: 0.56,
         fieldMultiplier: 1,
-        positionX: '0%',
-        positionY: '0%'
+        positionX: '40%',
+        positionY: '-0.1%'
     },
     {
         fruitName: "Szpinak",
@@ -23,8 +23,8 @@ export const fruitFactory = [
         fruitCrop: 4,
         fruitPrice: 2.1,
         fieldMultiplier: 1,
-        positionX: '0%',
-        positionY: '0%'
+        positionX: '49.78%',
+        positionY: '7.6%'
     },
     {
         fruitName: "Cebula",
@@ -32,8 +32,8 @@ export const fruitFactory = [
         fruitCrop: 4,
         fruitPrice: 1.85,
         fieldMultiplier: 1,
-        positionX: '0%',
-        positionY: '0%'
+        positionX: '80.3%',
+        positionY: '-0.2%'
     },
     {
         fruitName: "Kalafior",
@@ -41,8 +41,8 @@ export const fruitFactory = [
         fruitCrop: 4,
         fruitPrice: 4.1,
         fieldMultiplier: 1,
-        positionX: '0%',
-        positionY: '0%'
+        positionX: '9.7%',
+        positionY: '7.6%'
     },
     {
         fruitName: "Ziemniak",
@@ -50,8 +50,8 @@ export const fruitFactory = [
         fruitCrop: 4,
         fruitPrice: 4,
         fieldMultiplier: 1,
-        positionX: '0%',
-        positionY: '0%'
+        positionX: '9.9%',
+        positionY: '5%'
     },
     {
         fruitName: "Czosnek",
@@ -59,8 +59,8 @@ export const fruitFactory = [
         fruitCrop: 4,
         fruitPrice: 5.1,
         fieldMultiplier: 1,
-        positionX: '0%',
-        positionY: '0%'
+        positionX: '40%',
+        positionY: '7.65%'
     },
     {
         fruitName: "Papryka",
@@ -68,8 +68,8 @@ export const fruitFactory = [
         fruitCrop: 5,
         fruitPrice: 8,
         fieldMultiplier: 1,
-        positionX: '0%',
-        positionY: '0%'
+        positionX: '40%',
+        positionY: '2.5%'
     },
     {
         fruitName: "Brokuł",
@@ -77,8 +77,8 @@ export const fruitFactory = [
         fruitCrop: 4,
         fruitPrice: 4.95,
         fieldMultiplier: 1,
-        positionX: '0%',
-        positionY: '0%'
+        positionX: '20%',
+        positionY: '7.6%'
     },
     {
         fruitName: "Oberżyna",
@@ -86,7 +86,7 @@ export const fruitFactory = [
         fruitCrop: 5,
         fruitPrice: 9.5,
         fieldMultiplier: 1,
-        positionX: '0%',
+        positionX: '60.3%',
         positionY: '0%'
     },
     {
@@ -95,8 +95,8 @@ export const fruitFactory = [
         fruitCrop: 4,
         fruitPrice: 11,
         fieldMultiplier: 1,
-        positionX: '0%',
-        positionY: '0%'
+        positionX: '50%',
+        positionY: '2.5%'
     },
     {
         fruitName: "Malina",
@@ -104,7 +104,7 @@ export const fruitFactory = [
         fruitCrop: 5,
         fruitPrice: 8.2,
         fieldMultiplier: 1,
-        positionX: '0%',
+        positionX: '90.4%',
         positionY: '0%'
     },
     {
@@ -113,8 +113,8 @@ export const fruitFactory = [
         fruitCrop: 6,
         fruitPrice: 5.45,
         fieldMultiplier: 1,
-        positionX: '0%',
-        positionY: '0%'
+        positionX: '30%',
+        positionY: '7.7%'
     },
     {
         fruitName: "Słonecznik",
@@ -122,8 +122,8 @@ export const fruitFactory = [
         fruitCrop: 3,
         fruitPrice: 1.85,
         fieldMultiplier: 1,
-        positionX: '0%',
-        positionY: '0%'
+        positionX: '70.5%',
+        positionY: '10.2%'
     },
     {
         fruitName: "Nagietki",
@@ -149,8 +149,8 @@ export const fruitFactory = [
         fruitCrop: 6,
         fruitPrice: 6.4,
         fieldMultiplier: 1,
-        positionX: '0%',
-        positionY: '0%'
+        positionX: '-.2%',
+        positionY: '2.5%'
     },
     {
         fruitName: "Rzodkiewka",
@@ -158,8 +158,8 @@ export const fruitFactory = [
         fruitCrop: 3,
         fruitPrice: 0.24,
         fieldMultiplier: 1,
-        positionX: '0%',
-        positionY: '0%'
+        positionX: '30%',
+        positionY: '2.5%'
     },
     {
         fruitName: "Ogórek",
@@ -167,8 +167,8 @@ export const fruitFactory = [
         fruitCrop: 4,
         fruitPrice: 0.14,
         fieldMultiplier: 1,
-        positionX: '0%',
-        positionY: '0%'
+        positionX: '10%',
+        positionY: '2.5%'
     },
     {
         fruitName: "Mirabelka",
@@ -195,7 +195,7 @@ export const fruitFactory = [
         fruitCrop: 5,
         fruitPrice: 9.5,
         fieldMultiplier: 2,
-        positionX: '0%',
-        positionY: '0%'
+        positionX: '90.5%',
+        positionY: '2.5%'
     }
 ];

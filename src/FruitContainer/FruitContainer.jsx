@@ -104,19 +104,20 @@ const FruitContainer = ({
                             : ["FruitContainer"]
                     }
                 >
+                    <div className="ContainerTitle">
                     <h2 className="Title">{fruitName}</h2>
                     <div style={image}/>
-                    <p>
+                    </div>
+                    <p className="Paragraph">
                         <strong>Czas uprawy: </strong> {getCroppingTimeHoursAndMinute()}
                     </p>
-                    <p>
+                    <p className="Paragraph">
                         <strong>Plon: </strong>
                         {`${fruitCrop} sztuk`}
                     </p>
-                    <div className="PriceContainer">
-                        <div className="CurrencyFieldContainer">
-                            <p>
-                                <strong>Cena za sztukę:</strong>
+                        <div className="WateringCheckboxContainer">
+                            <p className="Paragraph">
+                                <strong>Cena za sztukę: </strong>
                             </p>
                             <input
                                 id={fruitName}
@@ -132,12 +133,11 @@ const FruitContainer = ({
                                 max="999999"
                                 step="0.10"
                             />
-                            <p>kt</p>
+                            <p className="Currency">kt</p>
                         </div>
-                    </div>
                     <div className="WateringCheckboxContainer">
-                        <p>
-                            <strong>Podlewanie</strong>
+                        <p className="Paragraph">
+                            <strong>Podlewanie </strong>
                         </p>
                         <input
                             type="checkbox"
@@ -147,7 +147,7 @@ const FruitContainer = ({
                         />
                     </div>
                     <div className="WateringCheckboxContainer">
-                        <strong>Zysk na godzinę:</strong>
+                        <p className="Paragraph"><strong>Zysk na godzinę: </strong></p>
                         <input
                             value={fruitProfit}
                             type="number"
@@ -161,9 +161,9 @@ const FruitContainer = ({
                             max="999999"
                             step="0.10"
                         />
-                        <p>kt</p>
+                        <p className="Currency">kt</p>
                     </div>
-                    <p>
+                    <p className="Paragraph">
                         <strong>Zysk z pola: </strong>
                         {((fruitPrice * fruitCrop) / fieldMultiplier).toFixed(2)} kt
                     </p>
