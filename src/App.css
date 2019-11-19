@@ -21,7 +21,7 @@ html {
     font-size: 1.4rem;
     background: whitesmoke;
     opacity: .8;
-    width: 24rem;
+    max-width: 24rem;
     box-shadow: 10px 10px 13px -12px rgba(0, 0, 0, 0.75);
     border-radius: 0.3rem;
     margin: 1rem auto 2rem;
