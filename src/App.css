@@ -1,6 +1,5 @@
 html {
     background: url('./img/greenFabric2.png');
-
 }
 
 .AppContainer {
@@ -10,9 +9,7 @@ html {
     flex-direction: row;
     flex-wrap: wrap;
     color: #454545;
-
 }
-
 
 .Header {
     text-align: center;
@@ -87,7 +84,6 @@ html {
     justify-content: space-between;
     align-items: center;
     line-height: 0;
-
 }
 
 .WateringCheckboxContainer {
