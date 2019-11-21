@@ -16,7 +16,7 @@ const FruitContainer = ({
     const image = {
         background: `url(${img})`,
         backgroundPosition: `${imgPositionX} ${imgPositionY}`,
-        margin: '0 auto',
+        marginLeft: '1.5rem',
         width: '2.7rem',
         height: '2.7rem',
     };
@@ -105,8 +105,9 @@ const FruitContainer = ({
                     }
                 >
                     <div className="ContainerTitle">
-                    <h2 className="Title">{fruitName}</h2>
-                    <div style={image}/>
+                        <div style={image}/>
+                        <h2 className="Title">{fruitName}</h2>
+
                     </div>
                     <p className="Paragraph">
                         <strong>Czas uprawy: </strong> {getCroppingTimeHoursAndMinute()}
@@ -115,26 +116,26 @@ const FruitContainer = ({
                         <strong>Plon: </strong>
                         {`${fruitCrop} sztuk`}
                     </p>
-                        <div className="WateringCheckboxContainer">
-                            <p className="Paragraph">
-                                <strong>Cena za sztukę: </strong>
-                            </p>
-                            <input
-                                id={fruitName}
-                                placeholder="cena"
-                                className="PriceField"
-                                type="number"
-                                value={price}
-                                onChange={handlePrice}
-                                onKeyUp={handleChangeProfit}
-                                onFocus={handleOnFocus}
-                                onBlur={handleOnBlur}
-                                min="0"
-                                max="999999"
-                                step="0.10"
-                            />
-                            <p className="Currency">kt</p>
-                        </div>
+                    <div className="WateringCheckboxContainer">
+                        <p className="Paragraph">
+                            <strong>Cena za sztukę: </strong>
+                        </p>
+                        <input
+                            id={fruitName}
+                            placeholder="cena"
+                            className="PriceField"
+                            type="number"
+                            value={price}
+                            onChange={handlePrice}
+                            onKeyUp={handleChangeProfit}
+                            onFocus={handleOnFocus}
+                            onBlur={handleOnBlur}
+                            min="0"
+                            max="999999"
+                            step="0.10"
+                        />
+                        <p className="Currency">kt</p>
+                    </div>
                     <div className="WateringCheckboxContainer">
                         <p className="Paragraph">
                             <strong>Podlewanie </strong>
