@@ -106,12 +106,15 @@ const FruitContainer = ({
     };
 
     const handleChangeChart = (e) => {
+        function changeSellPriceHistory() {
+            const sellPriceHistoryCopy = [...sellPriceHistory];
+            sellPriceHistoryCopy.pop();
+            sellPriceHistoryCopy.unshift(sellPrice);
+            setSellPriceHistory(sellPriceHistoryCopy)
+        }
+
         if (e.key === "Enter") {
-            console.log('kookos')
-            const sellPriceHistoryArr = [...sellPriceHistory];
-            sellPriceHistoryArr.pop();
-            sellPriceHistoryArr.unshift(sellPrice);
-            setSellPriceHistory(sellPriceHistoryArr)
+            changeSellPriceHistory();
         }
     };
 
