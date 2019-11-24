@@ -3,15 +3,15 @@ import styled from "styled-components";
 
 function offsetProportion(ktPositionOffset) {
     if (ktPositionOffset === 5) {
-        return -20;
-    }
-    if (ktPositionOffset === 6) {
         return -22;
     }
-    if (ktPositionOffset === 7) {
-        return -25;
+    if (ktPositionOffset === 6) {
+        return -24;
     }
-    return (-ktPositionOffset) - 14
+    if (ktPositionOffset === 7) {
+        return -27;
+    }
+    return (-ktPositionOffset) - 16
 }
 
 const ChartTitle = styled.h3`
