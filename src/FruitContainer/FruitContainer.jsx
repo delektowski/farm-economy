@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
 import img from "../img/fruitVege.jpg";
 import Chart from "./Chart/Chart";
-import {chartData} from '../Data/data'
+import PriceInput from "./PriceInput/PriceInput";
+import CheckboxInput from "./CheckboxInput/CheckboxInput";
 
 
 const FruitContainer = ({
@@ -24,6 +25,8 @@ const FruitContainer = ({
         height: "2.7rem"
     };
     const [price, setPrice] = useState(fruitPrice);
+    const [sellPriceHistory, setSellPriceHistory] = useState([1, 2, 5, 4]);
+    const [sellPrice, setSellPrice] = useState(sellPriceHistory[0]);
     const [fruitProfit, setFruitProfit] = useState(sortedFruitProfit);
     const [croppingTime, setCroppingTime] = useState(fruitCroppingTime);
     const [isFocus, setIsFocus] = useState(false);
@@ -92,10 +95,25 @@ const FruitContainer = ({
     };
 
     const handleProfitOnHour = e => {
-        setFruitProfit(e.target.value);
+        const changedProfitOnHour = e.target.value;
+        setFruitProfit(changedProfitOnHour);
         getPriceByProfitPerHour(e.target.value);
+    }
+
+    const handleSellPrice = (e) => {
+        const changedSellPrice = isNaN(parseInt(e.target.value, 10)) ? '' : parseInt(e.target.value, 10);
+        setSellPrice(changedSellPrice);
     };
 
+    const handleChangeChart = (e) => {
+        if (e.key === "Enter") {
+            console.log('kookos')
+            const sellPriceHistoryArr = [...sellPriceHistory];
+            sellPriceHistoryArr.pop();
+            sellPriceHistoryArr.unshift(sellPrice);
+            setSellPriceHistory(sellPriceHistoryArr)
+        }
+    };
 
     return (
         <div>
@@ -119,61 +137,45 @@ const FruitContainer = ({
                         <strong>Plon: </strong>
                         {`${fruitCrop} sztuk`}
                     </p>
-                    <div className="WateringCheckboxContainer">
-                        <p className="Paragraph">
-                            <strong>Cena za sztukę: </strong>
-                        </p>
-                        <input
-                            id={fruitName}
-                            placeholder="cena"
-                            className="PriceField"
-                            type="number"
-                            value={price}
-                            onChange={handlePrice}
-                            onKeyUp={handleChangeProfit}
-                            onFocus={handleOnFocus}
-                            onBlur={handleOnBlur}
-                            min="0"
-                            max="999999"
-                            step="0.10"
-                        />
-                        <p className="Currency">kt</p>
-                    </div>
-                    <div className="WateringCheckboxContainer">
-                        <p className="Paragraph">
-                            <strong>Podlewanie </strong>
-                        </p>
-                        <input
-                            type="checkbox"
-                            onChange={handleWateringCheckbox}
-                            onFocus={handleOnFocus}
-                            onBlur={handleOnBlur}
-                        />
-                    </div>
-                    <div className="WateringCheckboxContainer">
-                        <p className="Paragraph">
-                            <strong>Zysk na godzinę: </strong>
-                        </p>
-                        <input
-                            value={fruitProfit}
-                            type="number"
-                            placeholder="zysk"
-                            className="PriceField"
-                            onChange={handleProfitOnHour}
-                            onKeyUp={e => handleChangeSortingOnProfitChange(e)}
-                            onFocus={handleOnFocus}
-                            onBlur={handleOnBlur}
-                            min="0"
-                            max="999999"
-                            step="0.10"
-                        />
-                        <p className="Currency">kt</p>
-                    </div>
+                    <PriceInput
+                        title="Cena za sztukę"
+                        fruitName={fruitName}
+                        value={price}
+                        handleOnChange={handlePrice}
+                        handleOnKeyUp={handleChangeProfit}
+                        handleOnFocus={handleOnFocus}
+                        handleOnBlur={handleOnBlur}
+                    />
+                    <PriceInput
+                        title="Ostatnia sprzedaż"
+                        fruitName={fruitName}
+                        value={sellPrice}
+                        handleOnChange={handleSellPrice}
+                        handleOnKeyUp={handleChangeChart}
+                        handleOnFocus={handleOnFocus}
+                        handleOnBlur={handleOnBlur}
+                    />
+                    <CheckboxInput
+                        title="Podlewanie"
+                        handleOnChange={handleWateringCheckbox}
+                        handleOnFocus={handleOnFocus}
+                        handleOnBlur={handleOnBlur}
+                    />
+                    <PriceInput
+                        title="Zysk na godzinę"
+                        placeholder="zysk"
+                        fruitName={fruitName}
+                        value={fruitProfit}
+                        handleOnChange={handleProfitOnHour}
+                        handleOnKeyUp={e => handleChangeSortingOnProfitChange(e)}
+                        handleOnFocus={handleOnFocus}
+                        handleOnBlur={handleOnBlur}
+                    />
                     <p className="Paragraph">
                         <strong>Zysk z pola: </strong>
                         {((price * fruitCrop) / fieldMultiplier).toFixed(2)} kt
                     </p>
-                    <Chart chartData={chartData}/>
+                    <Chart chartData={sellPriceHistory}/>
                     <button onClick={() => setLastPrice(fruitName)}>BAZA</button>
                 </section>
             </label>
