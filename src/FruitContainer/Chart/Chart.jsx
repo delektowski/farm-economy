@@ -15,7 +15,7 @@ function offsetProportion(ktPositionOffset) {
 }
 
 const ChartTitle = styled.h3`
-margin: 2rem 0 1.4rem 0;
+margin: 1.7rem 0 1.4rem 0;
 line-height: 0;
 font-size: .8rem;
 `;
@@ -35,13 +35,13 @@ const ChartContainer = styled.div`
   border-left: 1px solid black;
   border-bottom: 1px solid black;
   position: relative;
-  margin-top: 1rem;
+  
 `;
 
 const ChartColumn = styled.div`
   width: 2.2rem;
   height: ${({height}) => height}%;
-  background: cyan;
+  background: #3385ff;
   border-right: solid grey 0.1rem;
   margin-left: 0.5rem;
   position: relative;

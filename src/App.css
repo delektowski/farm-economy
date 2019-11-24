@@ -40,10 +40,10 @@ html {
 }
 
 .FruitContainer {
-    width: 16rem;
+    width: 15rem;
     border-radius: 0.7rem;
-    margin: 0.7rem;
-    padding: .1rem 0 1.6rem 1rem;
+    margin: 0.5rem;
+    padding: .1rem 0 1rem 1rem;
     box-shadow: 10px 10px 13px -12px rgba(0, 0, 0, 0.75);
     background: whitesmoke;
 }
@@ -89,7 +89,7 @@ html {
 .CheckoboxPriceContainer {
     display: flex;
     width: 90%;
-    height: 2.1rem;
+    height: 1.8rem;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
@@ -97,8 +97,8 @@ html {
 }
 
 .Paragraph {
-    margin: .7rem 0;
-    margin-right: .3rem;
+    margin: .4rem .3rem .4rem 0;
+    font-size: .9rem;
 }
 
 .Currency {
