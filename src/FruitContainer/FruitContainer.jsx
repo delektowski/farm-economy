@@ -142,6 +142,7 @@ const FruitContainer = ({
                     </p>
                     <PriceInput
                         title="Cena za sztukę"
+                        placeholder="cena"
                         fruitName={fruitName}
                         value={price}
                         handleOnChange={handlePrice}
