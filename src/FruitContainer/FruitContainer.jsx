@@ -101,7 +101,7 @@ const FruitContainer = ({
     }
 
     const handleSellPrice = (e) => {
-        const changedSellPrice = isNaN(parseInt(e.target.value, 10)) ? '' : parseInt(e.target.value, 10);
+        const changedSellPrice = isNaN(parseFloat(e.target.value, 10)) ? '' : parseFloat(e.target.value, 10);
         setSellPrice(changedSellPrice);
     };
 
@@ -148,6 +148,7 @@ const FruitContainer = ({
                     />
                     <PriceInput
                         title="Ostatnia sprzedaż"
+                        placeholder="cena"
                         fruitName={fruitName}
                         value={sellPrice}
                         handleOnChange={handleSellPrice}
