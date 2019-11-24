@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import img from "../img/fruitVege.jpg";
+import Chart from "./Chart/Chart";
+import {chartData} from '../Data/data'
 
 const FruitContainer = ({
   fruitName,
@@ -106,6 +108,7 @@ const FruitContainer = ({
             <div style={image} />
             <h2 className="Title">{fruitName}</h2>
           </div>
+
           <p className="Paragraph">
             <strong>Czas uprawy: </strong> {getCroppingTimeHoursAndMinute()}
           </p>
@@ -167,6 +170,7 @@ const FruitContainer = ({
             <strong>Zysk z pola: </strong>
             {((price * fruitCrop) / fieldMultiplier).toFixed(2)} kt
           </p>
+          <Chart chartData={chartData}/>
         </section>
       </label>
     </div>

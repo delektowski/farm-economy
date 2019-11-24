@@ -28,7 +28,7 @@ html {
 .Title {
     text-align: center;
     font-weight: 500;
-    margin: .5rem .5rem .5rem 1.5rem;
+    margin: .5rem .5rem .5rem .8rem;
 }
 
 .ContainerTitle {
@@ -43,7 +43,7 @@ html {
     width: 14rem;
     border-radius: 0.7rem;
     margin: 0.7rem;
-    padding: .1rem 0 .1rem 1rem;
+    padding: .1rem 0 1rem 1rem;
     box-shadow: 10px 10px 13px -12px rgba(0, 0, 0, 0.75);
     background: whitesmoke;
 }
