@@ -3,18 +3,34 @@ import styled from "styled-components";
 
 function offsetProportion(ktPositionOffset) {
     if (ktPositionOffset === 5) {
-        return -25;
-    } else if (ktPositionOffset >= 6) {
-        return -27;
+        return -20;
     }
-    return (-ktPositionOffset) - 18
+    if (ktPositionOffset === 6) {
+        return -22;
+    }
+    if (ktPositionOffset === 7) {
+        return -25;
+    }
+    return (-ktPositionOffset) - 14
 }
+
+const ChartTitle = styled.h3`
+margin: 2rem 0 1.4rem 0;
+line-height: 0;
+font-size: .8rem;
+`;
+
+const TextBracket = styled.span`
+font-size: .8rem;
+text-align: center;
+font-weight: 100;
+`;
 
 const ChartContainer = styled.div`
   margin-left: 2.6rem;
   display: flex;
   align-items: flex-end;
-  width: 10rem;
+  width: 11rem;
   height: 3rem;
   border-left: 1px solid black;
   border-bottom: 1px solid black;
@@ -23,11 +39,11 @@ const ChartContainer = styled.div`
 `;
 
 const ChartColumn = styled.div`
-  width: 2rem;
+  width: 2.2rem;
   height: ${({height}) => height}%;
   background: cyan;
   border-right: solid grey 0.1rem;
-  margin-left: 0.4rem;
+  margin-left: 0.5rem;
   position: relative;
   &:after {
   content: "${({cost}) => cost.toFixed(2)}";
@@ -78,7 +94,11 @@ const Chart = ({chartData}) => {
 
     return (
         <div>
+            <ChartTitle>Historia cen <TextBracket>
+                (od lewej najnowsze)
+            </TextBracket></ChartTitle>
             <ChartContainer>
+
                 <ChartLine top={0} kt={setKtAmount(3)} ktPositionOffset={getKtPositionOffset()}/>
                 <ChartLine top={33} kt={setKtAmount(2)} ktPositionOffset={getKtPositionOffset()}/>
                 <ChartLine top={66} kt={setKtAmount(1)} ktPositionOffset={getKtPositionOffset()}/>

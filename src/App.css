@@ -40,10 +40,10 @@ html {
 }
 
 .FruitContainer {
-    width: 14rem;
+    width: 16rem;
     border-radius: 0.7rem;
     margin: 0.7rem;
-    padding: .1rem 0 1rem 1rem;
+    padding: .1rem 0 1.6rem 1rem;
     box-shadow: 10px 10px 13px -12px rgba(0, 0, 0, 0.75);
     background: whitesmoke;
 }
