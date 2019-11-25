@@ -3,6 +3,9 @@ import img from "../img/fruitVege.jpg";
 import Chart from "./Chart/Chart";
 import PriceInput from "./PriceInput/PriceInput";
 import CheckboxInput from "./CheckboxInput/CheckboxInput";
+import firebase from 'firebase/app';
+import 'firebase/database';
+import {changeDiacriticToStandard} from "../lib/helper";
 
 
 const FruitContainer = ({
@@ -15,7 +18,6 @@ const FruitContainer = ({
                             fieldMultiplier,
                             imgPositionX,
                             imgPositionY,
-                            setLastPrice
                         }) => {
     const image = {
         background: `url(${img})`,
@@ -25,8 +27,8 @@ const FruitContainer = ({
         height: "2.7rem"
     };
     const [price, setPrice] = useState(fruitPrice);
-    const [sellPriceHistory, setSellPriceHistory] = useState([1, 2, 5, 4]);
-    const [sellPrice, setSellPrice] = useState(sellPriceHistory[0]);
+    const [sellPriceHistory, setSellPriceHistory] = useState([0,0,0,0]);
+    const [sellPrice, setSellPrice] = useState(0);
     const [fruitProfit, setFruitProfit] = useState(sortedFruitProfit);
     const [croppingTime, setCroppingTime] = useState(fruitCroppingTime);
     const [isFocus, setIsFocus] = useState(false);
@@ -86,6 +88,18 @@ const FruitContainer = ({
         handleChangeFruitProperty(fruitName, croppingTime, "fruitCroppingTime");
     }, [croppingTime]);
 
+    useEffect(() => {
+        const plantsData = firebase.database().ref(`plants/${changeDiacriticToStandard(fruitName)}`);
+        plantsData.on('value', function (snapshot) {
+            if (snapshot.val() !== null) {
+                setSellPriceHistory(Object.values(snapshot.val()))
+            }
+        });
+    }, []);
+    useEffect(() => {
+        setSellPrice(sellPriceHistory[0])
+    },[sellPriceHistory]);
+
     const handleWateringCheckbox = e => {
         if (e.target.checked) {
             setCroppingTime(croppingTime - Math.ceil(croppingTime * 0.06));
@@ -98,11 +112,20 @@ const FruitContainer = ({
         const changedProfitOnHour = e.target.value;
         setFruitProfit(changedProfitOnHour);
         getPriceByProfitPerHour(e.target.value);
-    }
+    };
 
     const handleSellPrice = (e) => {
         const changedSellPrice = isNaN(parseFloat(e.target.value, 10)) ? '' : parseFloat(e.target.value, 10);
         setSellPrice(changedSellPrice);
+    };
+
+    const sendDataToFirebase = (data) => {
+        firebase.database().ref(`plants/${changeDiacriticToStandard(fruitName)}`).set({
+            price1: data[0],
+            price2: data[1],
+            price3: data[2],
+            price4: data[3],
+        });
     };
 
     const handleChangeChart = (e) => {
@@ -110,7 +133,7 @@ const FruitContainer = ({
             const sellPriceHistoryCopy = [...sellPriceHistory];
             sellPriceHistoryCopy.pop();
             sellPriceHistoryCopy.unshift(sellPrice);
-            setSellPriceHistory(sellPriceHistoryCopy)
+            sendDataToFirebase(sellPriceHistoryCopy)
         }
 
         if (e.key === "Enter") {
@@ -181,7 +204,6 @@ const FruitContainer = ({
                         {((price * fruitCrop) / fieldMultiplier).toFixed(2)} kt
                     </p>
                     <Chart chartData={sellPriceHistory}/>
-                    <button onClick={() => setLastPrice(fruitName)}>BAZA</button>
                 </section>
             </label>
         </div>

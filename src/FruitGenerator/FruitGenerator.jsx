@@ -1,13 +1,9 @@
 import React, {useState} from "react";
 import {fruitFactory} from "../FruitFactory/FruitFactory";
 import FruitContainer from "../FruitContainer/FruitContainer";
-import firebase from 'firebase/app';
-import 'firebase/database';
-import {changeDiacriticToStandard} from "../lib/helper";
 
 const FruitGenerator = () => {
     const [fruitList, setFruitList] = useState(fruitFactory);
-
     const handleChangeFruitProperty = (fruitName, newValue, property) => {
         const changedFruitList = fruitList.map(fruit => {
             const fruitCopy = {...fruit};
@@ -49,15 +45,6 @@ const FruitGenerator = () => {
         });
     };
 
-    const setLastPriceHandler = (item) => {
-        firebase.database().ref(`plants/${changeDiacriticToStandard(item)}`).set({
-            price1: 1,
-            price2: 2,
-            price3: 3,
-            price4: 4,
-        });
-    };
-
     return (
         <div className="ContentContainer">
             <h1 className="Header">
@@ -77,7 +64,6 @@ const FruitGenerator = () => {
                             imgPositionX={fruit.positionX}
                             imgPositionY={fruit.positionY}
                             handleChangeFruitProperty={handleChangeFruitProperty}
-                            setLastPrice={setLastPriceHandler}
                         />
                     );
                 })}

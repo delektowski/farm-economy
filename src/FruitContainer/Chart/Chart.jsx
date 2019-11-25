@@ -35,18 +35,24 @@ const ChartContainer = styled.div`
   border-left: 1px solid black;
   border-bottom: 1px solid black;
   position: relative;
-  
 `;
 
 const ChartColumn = styled.div`
   width: 2.2rem;
-  height: ${({height}) => height}%;
+  height: ${({height}) => {
+    return height
+}}%;
   background: #3385ff;
   border-right: solid grey 0.1rem;
   margin-left: 0.5rem;
   position: relative;
   &:after {
-  content: "${({cost}) => cost.toFixed(2)}";
+  content: "${({cost}) => {
+    if (cost === '') {
+        return '';
+    }
+    return cost.toFixed(2)
+}}";
   position: absolute;
   bottom: -1rem;
   left: 50%;
@@ -89,7 +95,17 @@ const Chart = ({chartData}) => {
         if (ktLine === 1) {
             return (chartDataMax - (chartDataMax / 3 + chartDataMax / 3)).toFixed(2)
         }
+    };
 
+    const drawColumns = () => {
+        const columnKeys = ['col1', 'col2', 'col3', 'col4'];
+
+        return chartData.map((column, i) => {
+            if (chartData[i] === 0) {
+                return (<ChartColumn key={columnKeys[i]} height={0} cost=''/>)
+            }
+            return (<ChartColumn key={columnKeys[i]} height={(chartData[i] / chartDataMax) * 100} cost={chartData[i]}/>)
+        })
     };
 
     return (
@@ -98,14 +114,10 @@ const Chart = ({chartData}) => {
                 (od lewej najnowsze)
             </TextBracket></ChartTitle>
             <ChartContainer>
-
                 <ChartLine top={0} kt={setKtAmount(3)} ktPositionOffset={getKtPositionOffset()}/>
                 <ChartLine top={33} kt={setKtAmount(2)} ktPositionOffset={getKtPositionOffset()}/>
                 <ChartLine top={66} kt={setKtAmount(1)} ktPositionOffset={getKtPositionOffset()}/>
-                <ChartColumn height={(chartData[0] / chartDataMax) * 100} cost={chartData[0]}/>
-                <ChartColumn height={(chartData[1] / chartDataMax) * 100} cost={chartData[1]}/>
-                <ChartColumn height={(chartData[2] / chartDataMax) * 100} cost={chartData[2]}/>
-                <ChartColumn height={(chartData[3] / chartDataMax) * 100} cost={chartData[3]}/>
+                {drawColumns()}
             </ChartContainer>
         </div>
     );
