@@ -66,7 +66,7 @@ const ChartLine = styled.div`
   top: ${({top}) => top}%;
   transform: translateY(-50%);
   width: 100%;
-  background: black;
+  background: #afafaf;
   position: absolute;
   &:after {
     content: "${props => props.kt} kt";
