@@ -18,6 +18,7 @@ const FruitContainer = ({
                             fieldMultiplier,
                             imgPositionX,
                             imgPositionY,
+    index
                         }) => {
     const image = {
         background: `url(${img})`,
@@ -151,6 +152,8 @@ const FruitContainer = ({
                             : ["FruitContainer"]
                     }
                 >
+
+                    <h3 className="OrderNumber">{index}</h3>
                     <div className="ContainerTitle">
                         <div style={image}/>
                         <h2 className="Title">{fruitName}</h2>

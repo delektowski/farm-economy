@@ -51,9 +51,10 @@ const FruitGenerator = () => {
                 Działkowe inwestycje
             </h1>
             <div className="AppContainer">
-                {sortedFruitsAndProfit().map(fruit => {
+                {sortedFruitsAndProfit().map((fruit,i) => {
                     return (
                         <FruitContainer
+                            index={i+1}
                             key={fruit.fruitName}
                             fruitName={fruit.fruitName}
                             fruitPrice={fruit.fruitPrice}
