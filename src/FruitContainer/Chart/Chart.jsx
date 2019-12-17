@@ -1,29 +1,32 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import firebase from 'firebase/app';
+import 'firebase/database';
+import { changeDiacriticToStandard } from '../../lib/helper';
 
 function offsetProportion(ktPositionOffset) {
-    if (ktPositionOffset === 5) {
-        return -22;
-    }
-    if (ktPositionOffset === 6) {
-        return -24;
-    }
-    if (ktPositionOffset === 7) {
-        return -27;
-    }
-    return (-ktPositionOffset) - 16
+  if (ktPositionOffset === 5) {
+    return -22;
+  }
+  if (ktPositionOffset === 6) {
+    return -24;
+  }
+  if (ktPositionOffset === 7) {
+    return -27;
+  }
+  return -ktPositionOffset - 16;
 }
 
 const ChartTitle = styled.h3`
-margin: 1.7rem 0 1.4rem 0;
-line-height: 0;
-font-size: .8rem;
+  margin: 1.7rem 0 1.4rem 0;
+  line-height: 0;
+  font-size: 0.8rem;
 `;
 
 const TextBracket = styled.span`
-font-size: .8rem;
-text-align: center;
-font-weight: 100;
+  font-size: 0.8rem;
+  text-align: center;
+  font-weight: 100;
 `;
 
 const ChartContainer = styled.div`
@@ -39,20 +42,20 @@ const ChartContainer = styled.div`
 
 const ChartColumn = styled.div`
   width: 2.2rem;
-  height: ${({height}) => {
-    return height
-}}%;
+  height: ${({ height }) => {
+    return height;
+  }}%;
   background: #3385ff;
   border-right: solid grey 0.1rem;
   margin-left: 0.5rem;
   position: relative;
   &:after {
-  content: "${({cost}) => {
+  content: "${({ cost }) => {
     if (cost === '') {
-        return '';
+      return '';
     }
-    return cost.toFixed(2)
-}}";
+    return cost.toFixed(2);
+  }}";
   position: absolute;
   bottom: -1rem;
   left: 50%;
@@ -63,7 +66,7 @@ const ChartColumn = styled.div`
 
 const ChartLine = styled.div`
   height: 1px;
-  top: ${({top}) => top}%;
+  top: ${({ top }) => top}%;
   transform: translateY(-50%);
   width: 100%;
   background: #afafaf;
@@ -71,56 +74,122 @@ const ChartLine = styled.div`
   &:after {
     content: "${props => props.kt} kt";
     position: absolute;
-    left: ${({ktPositionOffset}) => {
-    return offsetProportion(ktPositionOffset)
-}}%;
+    left: ${({ ktPositionOffset }) => {
+      return offsetProportion(ktPositionOffset);
+    }}%;
     font-size: 0.6rem;
     top: -500%;
   }
 `;
 
-const Chart = ({chartData}) => {
-    const chartDataMax = Math.ceil(Math.max(...chartData));
-    const getKtPositionOffset = () => {
-        return (chartDataMax).toFixed(2).length
-    };
-    const setKtAmount = (ktLine) => {
+const Chart = ({
+  fruitName,
+  isChangeSellPrice,
+  sellPrice,
+  resetIsChangeSellPrice,
+}) => {
+  const [sellPriceHistory, setSellPriceHistory] = useState([0, 0, 0, 0]);
+  const chartDataMax = Math.ceil(Math.max(...sellPriceHistory));
 
-        if (ktLine === 3) {
-            return chartDataMax.toFixed(2)
-        }
-        if (ktLine === 2) {
-            return (chartDataMax - chartDataMax / 3).toFixed(2)
-        }
-        if (ktLine === 1) {
-            return (chartDataMax - (chartDataMax / 3 + chartDataMax / 3)).toFixed(2)
-        }
-    };
+  const sendDataToFirebase = data => {
+    firebase
+      .database()
+      .ref(`plants/${changeDiacriticToStandard(fruitName)}`)
+      .set({
+        price1: data[0],
+        price2: data[1],
+        price3: data[2],
+        price4: data[3],
+      });
+  };
 
-    const drawColumns = () => {
-        const columnKeys = ['col1', 'col2', 'col3', 'col4'];
+  const getKtPositionOffset = () => {
+    return chartDataMax.toFixed(2).length;
+  };
+  const setKtAmount = ktLine => {
+    if (ktLine === 3) {
+      return chartDataMax.toFixed(2);
+    }
+    if (ktLine === 2) {
+      return (chartDataMax - chartDataMax / 3).toFixed(2);
+    }
+    if (ktLine === 1) {
+      return (chartDataMax - (chartDataMax / 3 + chartDataMax / 3)).toFixed(2);
+    }
+  };
 
-        return chartData.map((column, i) => {
-            if (chartData[i] === 0) {
-                return (<ChartColumn key={columnKeys[i]} height={0} cost=''/>)
-            }
-            return (<ChartColumn key={columnKeys[i]} height={(chartData[i] / chartDataMax) * 100} cost={chartData[i]}/>)
-        })
-    };
+  const handleSetNewColumn = () => {
+    const sellPriceHistoryCopy = [...sellPriceHistory];
+    sellPriceHistoryCopy.pop();
+    sellPriceHistoryCopy.unshift(sellPrice);
+    sendDataToFirebase(sellPriceHistoryCopy);
+  };
 
-    return (
-        <div>
-            <ChartTitle>Historia cen <TextBracket>
-                (od lewej najnowsze)
-            </TextBracket></ChartTitle>
-            <ChartContainer>
-                <ChartLine top={0} kt={setKtAmount(3)} ktPositionOffset={getKtPositionOffset()}/>
-                <ChartLine top={33} kt={setKtAmount(2)} ktPositionOffset={getKtPositionOffset()}/>
-                <ChartLine top={66} kt={setKtAmount(1)} ktPositionOffset={getKtPositionOffset()}/>
-                {drawColumns()}
-            </ChartContainer>
-        </div>
-    );
+  useEffect(() => {
+    const plantsData = firebase
+      .database()
+      .ref(`plants/${changeDiacriticToStandard(fruitName)}`);
+    plantsData.on('value', function(snapshot) {
+      if (snapshot.val() !== null) {
+        setSellPriceHistory(Object.values(snapshot.val()));
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    if (isChangeSellPrice) {
+      handleSetNewColumn();
+      resetIsChangeSellPrice();
+    }
+  }, [isChangeSellPrice]);
+
+  const handleClickColumn = () => {
+    console.log('fruitName', fruitName);
+  };
+
+  const drawColumns = () => {
+    const columnKeys = ['col1', 'col2', 'col3', 'col4'];
+
+    return sellPriceHistory.map((column, i) => {
+      if (sellPriceHistory[i] === 0) {
+        return <ChartColumn key={columnKeys[i]} height={0} cost="" />;
+      }
+      return (
+        <ChartColumn
+          key={columnKeys[i]}
+          height={(sellPriceHistory[i] / chartDataMax) * 100}
+          cost={sellPriceHistory[i]}
+          onClick={handleClickColumn}
+        />
+      );
+    });
+  };
+
+  return (
+    <div>
+      <ChartTitle>
+        Historia cen <TextBracket>(od lewej najnowsze)</TextBracket>
+      </ChartTitle>
+      <ChartContainer>
+        <ChartLine
+          top={0}
+          kt={setKtAmount(3)}
+          ktPositionOffset={getKtPositionOffset()}
+        />
+        <ChartLine
+          top={33}
+          kt={setKtAmount(2)}
+          ktPositionOffset={getKtPositionOffset()}
+        />
+        <ChartLine
+          top={66}
+          kt={setKtAmount(1)}
+          ktPositionOffset={getKtPositionOffset()}
+        />
+        {drawColumns()}
+      </ChartContainer>
+    </div>
+  );
 };
 
 export default Chart;
