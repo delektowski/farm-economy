@@ -32,6 +32,9 @@ const FruitContainer = ({
   const [isChangeSellPriceHistory, setIsChangeSellPriceHistory] = useState(
     false,
   );
+  const [isResetDeleteColumnButton, setIsResetDeleteColumnButton] = useState(
+    false,
+  );
 
   const getProfitPerHour = fruitPrice => {
     const hourMultiplier = croppingTime / 60;
@@ -118,10 +121,17 @@ const FruitContainer = ({
     setIsChangeSellPriceHistory(false);
   };
 
+  const handleHideDeleteColumnButton = e => {
+    if (e.target.localName !== 'input') {
+      setIsResetDeleteColumnButton(!isResetDeleteColumnButton);
+    }
+  };
+
   return (
     <div>
       <label htmlFor={fruitName}>
         <section
+          onClick={handleHideDeleteColumnButton}
           className={
             isFocus
               ? ['FruitContainer', 'Focused'].join(' ')
@@ -139,7 +149,7 @@ const FruitContainer = ({
           </p>
           <p className="Paragraph">
             <strong>Plon: </strong>
-            {`${fruitCrop} sztuk`}
+            {`${fruitCrop} szt.`}
           </p>
           <PriceInput
             title="Cena za sztukę"
@@ -186,6 +196,7 @@ const FruitContainer = ({
             sellPrice={sellPrice}
             isChangeSellPrice={isChangeSellPriceHistory}
             resetIsChangeSellPrice={handleResetIsChangeSellPrice}
+            isResetDeleteColumnButton={isResetDeleteColumnButton}
           />
         </section>
       </label>

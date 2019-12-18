@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import { changeDiacriticToStandard } from '../../lib/helper';
+import DeleteColumn from './DeleteColumnButton/DeleteColumnButton';
 
 function offsetProportion(ktPositionOffset) {
   if (ktPositionOffset === 5) {
@@ -31,6 +32,8 @@ const TextBracket = styled.span`
 
 const ChartContainer = styled.div`
   margin-left: 2.6rem;
+  margin-top: 3rem;
+  margin-bottom: 0.3rem;
   display: flex;
   align-items: flex-end;
   width: 11rem;
@@ -87,10 +90,11 @@ const Chart = ({
   isChangeSellPrice,
   sellPrice,
   resetIsChangeSellPrice,
+  isResetDeleteColumnButton,
 }) => {
   const [sellPriceHistory, setSellPriceHistory] = useState([0, 0, 0, 0]);
   const chartDataMax = Math.ceil(Math.max(...sellPriceHistory));
-
+  const [deleteColumnKey, setDeleteColumnKey] = useState(null);
   const sendDataToFirebase = data => {
     firebase
       .database()
@@ -143,24 +147,32 @@ const Chart = ({
     }
   }, [isChangeSellPrice]);
 
-  const handleClickColumn = () => {
-    console.log('fruitName', fruitName);
+  useEffect(() => {
+    setDeleteColumnKey(null);
+  }, [isResetDeleteColumnButton]);
+
+  const handleClickColumn = (e, columnKey) => {
+    e.stopPropagation();
+    setDeleteColumnKey(columnKey);
   };
 
   const drawColumns = () => {
-    const columnKeys = ['col1', 'col2', 'col3', 'col4'];
+    const columnKeys = ['price1', 'price2', 'price3', 'price4'];
 
     return sellPriceHistory.map((column, i) => {
+      const columnKey = columnKeys[i];
       if (sellPriceHistory[i] === 0) {
-        return <ChartColumn key={columnKeys[i]} height={0} cost="" />;
+        return <ChartColumn key={columnKey} height={0} cost="" />;
       }
       return (
         <ChartColumn
-          key={columnKeys[i]}
+          key={columnKey}
           height={(sellPriceHistory[i] / chartDataMax) * 100}
           cost={sellPriceHistory[i]}
-          onClick={handleClickColumn}
-        />
+          onClick={e => handleClickColumn(e, columnKeys[i])}
+        >
+          {deleteColumnKey === columnKey && <DeleteColumn columnKey={columnKey} fruitName={fruitName}/>}
+        </ChartColumn>
       );
     });
   };
