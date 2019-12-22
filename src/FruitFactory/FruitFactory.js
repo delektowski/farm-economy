@@ -206,5 +206,14 @@ export const fruitFactory = [
         fieldMultiplier: 1,
         positionX: '9.7%',
         positionY: '-0.1%'
+    },
+    {
+        fruitName: "Jabłka",
+        fruitCroppingTime: 5760,
+        fruitCrop: 12,
+        fruitPrice: 55,
+        fieldMultiplier: 4,
+        positionX: '30%',
+        positionY: '-0.1%'
     }
 ];
