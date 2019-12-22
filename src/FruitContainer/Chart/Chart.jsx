@@ -92,19 +92,16 @@ const Chart = ({
   resetIsChangeSellPrice,
   isResetDeleteColumnButton,
 }) => {
-  const [sellPriceHistory, setSellPriceHistory] = useState([0, 0, 0, 0]);
-  const chartDataMax = Math.ceil(Math.max(...sellPriceHistory));
+  const [sellPriceHistory, setSellPriceHistory] = useState({
+    price0: 0,
+  });
+  const chartDataMax = Math.ceil(Math.max(...Object.values(sellPriceHistory)));
   const [deleteColumnKey, setDeleteColumnKey] = useState(null);
   const sendDataToFirebase = data => {
     firebase
       .database()
       .ref(`plants/${changeDiacriticToStandard(fruitName)}`)
-      .set({
-        price1: data[0],
-        price2: data[1],
-        price3: data[2],
-        price4: data[3],
-      });
+      .set(data);
   };
 
   const getKtPositionOffset = () => {
@@ -123,10 +120,24 @@ const Chart = ({
   };
 
   const handleSetNewColumn = () => {
-    const sellPriceHistoryCopy = [...sellPriceHistory];
-    sellPriceHistoryCopy.pop();
-    sellPriceHistoryCopy.unshift(sellPrice);
-    sendDataToFirebase(sellPriceHistoryCopy);
+    const sellPriceHistoryCopy = { ...sellPriceHistory };
+
+    const setNewColumn = () => {
+      if (Object.keys(sellPriceHistoryCopy).length > 3) {
+        delete sellPriceHistoryCopy.price3;
+      }
+      return Object.keys(sellPriceHistoryCopy).reduce(
+        (total, item, i) => {
+          return {
+            ...total,
+            [`price${i + 1}`]: Object.values(sellPriceHistoryCopy)[i],
+          };
+        },
+        { price0: sellPrice },
+      );
+    };
+
+    sendDataToFirebase(setNewColumn());
   };
 
   useEffect(() => {
@@ -135,7 +146,7 @@ const Chart = ({
       .ref(`plants/${changeDiacriticToStandard(fruitName)}`);
     plantsData.on('value', function(snapshot) {
       if (snapshot.val() !== null) {
-        setSellPriceHistory(Object.values(snapshot.val()));
+        setSellPriceHistory(snapshot.val());
       }
     });
   }, []);
@@ -157,21 +168,30 @@ const Chart = ({
   };
 
   const drawColumns = () => {
-    const columnKeys = ['price1', 'price2', 'price3', 'price4'];
+    const sellPriceHistoryVal = Object.values(sellPriceHistory);
+    const sellPriceHistoryKeys = Object.keys(sellPriceHistory);
 
-    return sellPriceHistory.map((column, i) => {
-      const columnKey = columnKeys[i];
-      if (sellPriceHistory[i] === 0) {
+    return sellPriceHistoryVal.map((item, i) => {
+      const columnKey = sellPriceHistoryKeys[i];
+
+      if (sellPriceHistoryVal[i] === 0) {
         return <ChartColumn key={columnKey} height={0} cost="" />;
       }
+
       return (
         <ChartColumn
           key={columnKey}
-          height={(sellPriceHistory[i] / chartDataMax) * 100}
-          cost={sellPriceHistory[i]}
-          onClick={e => handleClickColumn(e, columnKeys[i])}
+          height={(sellPriceHistoryVal[i] / chartDataMax) * 100}
+          cost={sellPriceHistoryVal[i]}
+          onClick={e => handleClickColumn(e, sellPriceHistoryKeys[i])}
         >
-          {deleteColumnKey === columnKey && <DeleteColumn columnKey={columnKey} fruitName={fruitName}/>}
+          {deleteColumnKey === columnKey && (
+            <DeleteColumn
+              columnKey={sellPriceHistoryKeys[i]}
+              fruitName={fruitName}
+              columnsAmount={sellPriceHistoryKeys.length}
+            />
+          )}
         </ChartColumn>
       );
     });

@@ -43,7 +43,6 @@ const FruitContainer = ({
 
   const getPriceByProfitPerHour = profitPerHour => {
     const price = (profitPerHour * croppingTime) / 60 / fruitCrop;
-    console.log('price', price.toFixed(2));
     setPrice(price.toFixed(2));
   };
 

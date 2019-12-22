@@ -7,21 +7,46 @@ import { changeDiacriticToStandard } from '../../../lib/helper';
 const DeleteButton = styled.div`
   width: 2.3rem;
   height: 2.3rem;
-  background: brown;
+  background: rgba(106, 106, 106, 0.3);
   position: absolute;
   top: 0;
   transform: translateY(-100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-const DeleteColumn = ({ columnKey, fruitName }) => {
-  const handleDeleteColumn = () => {
-    console.log('columnKey', columnKey);
+const Cross = styled.p`
+  font-family: Arial, serif;
+  color: red;
+  font-size: 1.7rem;
+`;
+
+const DeleteColumn = ({ columnKey, fruitName, columnsAmount }) => {
+  const sendDataToFirebase = () => {
+    const setFirstColumnToZero = { price0: 0 };
     firebase
       .database()
       .ref(`plants/${changeDiacriticToStandard(fruitName)}`)
-      .update({ [columnKey]: 0 });
+      .set(setFirstColumnToZero);
   };
-  return <DeleteButton onClick={handleDeleteColumn} />;
+
+  const handleDeleteColumn = () => {
+    firebase
+      .database()
+      .ref(`plants/${changeDiacriticToStandard(fruitName)}/${columnKey}`)
+      .remove(() => {
+        if (columnsAmount < 2) {
+          sendDataToFirebase();
+        }
+      });
+  };
+
+  return (
+    <DeleteButton onClick={handleDeleteColumn}>
+      <Cross>X</Cross>
+    </DeleteButton>
+  );
 };
 
 export default DeleteColumn;
