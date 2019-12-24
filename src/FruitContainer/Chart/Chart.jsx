@@ -164,7 +164,11 @@ const Chart = ({
 
   const handleClickColumn = (e, columnKey) => {
     e.stopPropagation();
-    setDeleteColumnKey(columnKey);
+    if (deleteColumnKey !== null) {
+      setDeleteColumnKey(null);
+    } else {
+      setDeleteColumnKey(columnKey);
+    }
   };
 
   const drawColumns = () => {
