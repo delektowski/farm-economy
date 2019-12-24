@@ -43,5 +43,5 @@ export const fruitFactory = [
   new Fruit('Szparagi', 2520, 5, 9.5, 2, '90.5%', '2.5%'),
   new Fruit('Sałata', 14, 2, 0.8, 1, '9.7%', '-0.1%'),
   new Fruit('Jabłka', 5760, 12, 55, 4, '30%', '-0.1%'),
-  new Fruit('Dynia', 8640, 6, 0, 1, '70%', '2.5%'),
+  new Fruit('Dynia', 8640, 6, 55, 1, '70%', '2.5%'),
 ];
