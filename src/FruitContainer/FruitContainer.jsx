@@ -3,6 +3,7 @@ import img from '../img/fruitVege.jpg';
 import Chart from './Chart/Chart';
 import PriceInput from './PriceInput/PriceInput';
 import CheckboxInput from './CheckboxInput/CheckboxInput';
+import EstimateCrop from './EstimateCrop/EstimateCrop';
 
 const FruitContainer = ({
   fruitName,
@@ -24,7 +25,6 @@ const FruitContainer = ({
     height: '2.7rem',
   };
 
-  const [dateNow, setDateNow] = useState(Date.now());
   const [price, setPrice] = useState(fruitPrice);
   const [sellPrice, setSellPrice] = useState(0);
   const [fruitProfit, setFruitProfit] = useState(sortedFruitProfit);
@@ -91,12 +91,6 @@ const FruitContainer = ({
     handleChangeFruitProperty(fruitName, croppingTime, 'fruitCroppingTime');
   }, [croppingTime]);
 
-  useEffect(() => {
-    setInterval(() => {
-      setDateNow(Date.now());
-    }, 60000);
-  }, []);
-
   const handleWateringCheckbox = e => {
     if (e.target.checked) {
       setCroppingTime(croppingTime - Math.ceil(croppingTime * 0.07));
@@ -134,33 +128,6 @@ const FruitContainer = ({
     }
   };
 
-  const getEstimatedCropTime = () => {
-    const getMillisecondsFromMinutes = minutes => {
-      return minutes * 60000;
-    };
-
-    const getMinutesAsTwoCharacters = minutes => {
-      return minutes.toString().length > 1 ? minutes : `0${minutes}`;
-    };
-
-    const getDateEstimated = () => {
-      return new Date(dateNow + getMillisecondsFromMinutes(croppingTime));
-    };
-
-    const day = getDateEstimated().getUTCDate();
-    const month = getDateEstimated().getMonth() + 1;
-    const year = getDateEstimated()
-      .getUTCFullYear()
-      .toString()
-      .substr(-2);
-    const hour = getDateEstimated().getHours();
-    const minutes = getDateEstimated().getMinutes();
-
-    return `${day}.${month}.${year} godz. ${hour}:${getMinutesAsTwoCharacters(
-      minutes,
-    )}`;
-  };
-
   return (
     <div>
       <label htmlFor={fruitName}>
@@ -181,9 +148,7 @@ const FruitContainer = ({
           <p className="Paragraph">
             <strong>Czas uprawy: </strong> {getCroppingTimeHoursAndMinute()}
           </p>
-          <p className="Paragraph">
-            <strong>Czas zbioru: </strong> {getEstimatedCropTime()}
-          </p>
+          <EstimateCrop croppingTime={croppingTime} />
           <p className="Paragraph">
             <strong>Plon: </strong>
             {`${fruitCrop} szt.`}
