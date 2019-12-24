@@ -1,219 +1,47 @@
-export const fruitFactory = [
-    {
-        fruitName: "Truskawka",
-        fruitCroppingTime: 120,
-        fruitCrop: 4,
-        fruitPrice: 0.48,
-        fieldMultiplier: 1,
-        positionX: '20%',
-        positionY: '0%'
-    },
-    {
-        fruitName: "Pomidor",
-        fruitCroppingTime: 140,
-        fruitCrop: 4,
-        fruitPrice: 0.56,
-        fieldMultiplier: 1,
-        positionX: '40%',
-        positionY: '-0.1%'
-    },
-    {
-        fruitName: "Szpinak",
-        fruitCroppingTime: 560,
-        fruitCrop: 4,
-        fruitPrice: 2.1,
-        fieldMultiplier: 1,
-        positionX: '49.78%',
-        positionY: '7.6%'
-    },
-    {
-        fruitName: "Cebula",
-        fruitCroppingTime: 480,
-        fruitCrop: 4,
-        fruitPrice: 1.85,
-        fieldMultiplier: 1,
-        positionX: '80.3%',
-        positionY: '-0.2%'
-    },
-    {
-        fruitName: "Kalafior",
-        fruitCroppingTime: 1000,
-        fruitCrop: 4,
-        fruitPrice: 4.1,
-        fieldMultiplier: 1,
-        positionX: '9.7%',
-        positionY: '7.6%'
-    },
-    {
-        fruitName: "Ziemniak",
-        fruitCroppingTime: 960,
-        fruitCrop: 4,
-        fruitPrice: 4,
-        fieldMultiplier: 1,
-        positionX: '9.9%',
-        positionY: '5%'
-    },
-    {
-        fruitName: "Czosnek",
-        fruitCroppingTime: 1320,
-        fruitCrop: 4,
-        fruitPrice: 5.1,
-        fieldMultiplier: 1,
-        positionX: '40%',
-        positionY: '7.65%'
-    },
-    {
-        fruitName: "Papryka",
-        fruitCroppingTime: 2400,
-        fruitCrop: 5,
-        fruitPrice: 8,
-        fieldMultiplier: 1,
-        positionX: '40%',
-        positionY: '2.5%'
-    },
-    {
-        fruitName: "Brokuł",
-        fruitCroppingTime: 1200,
-        fruitCrop: 4,
-        fruitPrice: 4.95,
-        fieldMultiplier: 1,
-        positionX: '20%',
-        positionY: '7.6%'
-    },
-    {
-        fruitName: "Oberżyna",
-        fruitCroppingTime: 2880,
-        fruitCrop: 5,
-        fruitPrice: 9.5,
-        fieldMultiplier: 1,
-        positionX: '60.3%',
-        positionY: '0%'
-    },
-    {
-        fruitName: "Cukinia",
-        fruitCroppingTime: 2880,
-        fruitCrop: 4,
-        fruitPrice: 11,
-        fieldMultiplier: 1,
-        positionX: '50%',
-        positionY: '2.5%'
-    },
-    {
-        fruitName: "Malina",
-        fruitCroppingTime: 2880,
-        fruitCrop: 5,
-        fruitPrice: 8.2,
-        fieldMultiplier: 1,
-        positionX: '90.4%',
-        positionY: '0%'
-    },
-    {
-        fruitName: "Jagoda",
-        fruitCroppingTime: 1920,
-        fruitCrop: 6,
-        fruitPrice: 5.45,
-        fieldMultiplier: 1,
-        positionX: '30%',
-        positionY: '7.7%'
-    },
-    {
-        fruitName: "Słonecznik",
-        fruitCroppingTime: 300,
-        fruitCrop: 3,
-        fruitPrice: 1.85,
-        fieldMultiplier: 1,
-        positionX: '70.5%',
-        positionY: '10.2%'
-    },
-    {
-        fruitName: "Nagietki",
-        fruitCroppingTime: 360,
-        fruitCrop: 4,
-        fruitPrice: 2,
-        fieldMultiplier: 1,
-        positionX: '80.5%',
-        positionY: '10.3%'
-    },
-    {
-        fruitName: "Jeżyna",
-        fruitCroppingTime: 2880,
-        fruitCrop: 3,
-        fruitPrice: 28.5,
-        fieldMultiplier: 1,
-        positionX: '70.5%',
-        positionY: '-0.1%'
-    },
-    {
-        fruitName: "Porzeczka",
-        fruitCroppingTime: 2160,
-        fruitCrop: 6,
-        fruitPrice: 6.4,
-        fieldMultiplier: 1,
-        positionX: '-.2%',
-        positionY: '2.5%'
-    },
-    {
-        fruitName: "Rzodkiewka",
-        fruitCroppingTime: 50,
-        fruitCrop: 3,
-        fruitPrice: 0.24,
-        fieldMultiplier: 1,
-        positionX: '30%',
-        positionY: '2.5%'
-    },
-    {
-        fruitName: "Ogórek",
-        fruitCroppingTime: 40,
-        fruitCrop: 4,
-        fruitPrice: 0.14,
-        fieldMultiplier: 1,
-        positionX: '10%',
-        positionY: '2.5%'
-    },
-    {
-        fruitName: "Mirabelka",
-        fruitCroppingTime: 8640,
-        fruitCrop: 10,
-        fruitPrice: 56,
-        fieldMultiplier: 4,
-        positionX: '60%',
-        positionY: '2.5%'
+class Fruit {
+  constructor(
+    fruitName,
+    fruitCroppingTime,
+    fruitCrop,
+    fruitPrice,
+    fieldMultiplier,
+    positionX,
+    positionY,
+  ) {
+    this.fruitName = fruitName;
+    this.fruitCroppingTime = fruitCroppingTime;
+    this.fruitCrop = fruitCrop;
+    this.fruitPrice = fruitPrice;
+    this.fieldMultiplier = fieldMultiplier;
+    this.positionX = positionX;
+    this.positionY = positionY;
+  }
+}
 
-    },
-    {
-        fruitName: "Róża",
-        fruitCroppingTime: 420,
-        fruitCrop: 2,
-        fruitPrice: 4.1,
-        fieldMultiplier: 1,
-        positionX: '90.5%',
-        positionY: '10.2%'
-    },
-    {
-        fruitName: "Szparagi",
-        fruitCroppingTime: 2520,
-        fruitCrop: 5,
-        fruitPrice: 9.5,
-        fieldMultiplier: 2,
-        positionX: '90.5%',
-        positionY: '2.5%'
-    },
-    {
-        fruitName: "Sałata",
-        fruitCroppingTime: 14,
-        fruitCrop: 2,
-        fruitPrice: 0.8,
-        fieldMultiplier: 1,
-        positionX: '9.7%',
-        positionY: '-0.1%'
-    },
-    {
-        fruitName: "Jabłka",
-        fruitCroppingTime: 5760,
-        fruitCrop: 12,
-        fruitPrice: 55,
-        fieldMultiplier: 4,
-        positionX: '30%',
-        positionY: '-0.1%'
-    }
+export const fruitFactory = [
+  new Fruit('Truskawka', 120, 4, 0.48, 1, '20%', '0%'),
+  new Fruit('Pomidor', 140, 4, 0.56, 1, '40%', '-0.1%'),
+  new Fruit('Szpinak', 560, 4, 2.1, 1, '49.78%', '7.6%'),
+  new Fruit('Cebula', 480, 4, 1.85, 1, '80.3%', '-0.2%'),
+  new Fruit('Kalafior', 1000, 4, 4.1, 1, '9.7%', '7.6%'),
+  new Fruit('Ziemniak', 960, 4, 4, 1, '9.9%', '5%'),
+  new Fruit('Czosnek', 1320, 4, 5.1, 1, '40%', '7.65%'),
+  new Fruit('Papryka', 2400, 5, 8, 1, '40%', '2.5%'),
+  new Fruit('Brokuł', 1200, 4, 4.95, 1, '20%', '7.6%'),
+  new Fruit('Oberżyna', 2880, 5, 9.5, 1, '60.3%', '0%'),
+  new Fruit('Cukinia', 2880, 4, 11, 1, '50%', '2.5%'),
+  new Fruit('Malina', 2880, 5, 8.2, 1, '90.4%', '0%'),
+  new Fruit('Jagoda', 1920, 6, 5.45, 1, '30%', '7.7%'),
+  new Fruit('Słonecznik', 300, 3, 1.85, 1, '70.5%', '10.2%'),
+  new Fruit('Nagietki', 360, 4, 2, 1, '80.5%', '10.3%'),
+  new Fruit('Jeżyna', 2880, 3, 28.5, 1, '70.5%', '-0.1%'),
+  new Fruit('Porzeczka', 2160, 6, 6.4, 1, '-.2%', '2.5%'),
+  new Fruit('Rzodkiewka', 50, 3, 0.24, 1, '30%', '2.5%'),
+  new Fruit('Ogórek', 40, 4, 0.14, 1, '10%', '2.5%'),
+  new Fruit('Mirabelka', 8640, 10, 56, 4, '60%', '2.5%'),
+  new Fruit('Róża', 420, 2, 4.1, 1, '90.5%', '10.2%'),
+  new Fruit('Szparagi', 2520, 5, 9.5, 2, '90.5%', '2.5%'),
+  new Fruit('Sałata', 14, 2, 0.8, 1, '9.7%', '-0.1%'),
+  new Fruit('Jabłka', 5760, 12, 55, 4, '30%', '-0.1%'),
+  new Fruit('Dynia', 8640, 6, 0, 1, '70%', '2.5%'),
 ];
