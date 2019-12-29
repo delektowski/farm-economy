@@ -93,7 +93,7 @@ const FruitContainer = ({
 
   const handleWateringCheckbox = e => {
     if (e.target.checked) {
-      setCroppingTime(croppingTime - Math.ceil(croppingTime * 0.07));
+      setCroppingTime(croppingTime - Math.ceil(croppingTime * 0.08));
     } else {
       setCroppingTime(croppingTimeCheckboxFalse);
     }
