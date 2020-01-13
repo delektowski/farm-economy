@@ -19,7 +19,7 @@ function offsetProportion(ktPositionOffset) {
 }
 
 const ChartTitle = styled.h3`
-  margin: 1.7rem 0 1.4rem 0;
+  margin: 1.1rem 0 1.4rem 0;
   line-height: 0;
   font-size: 0.8rem;
 `;
@@ -204,7 +204,7 @@ const Chart = ({
   return (
     <div>
       <ChartTitle>
-        Historia cen <TextBracket>(od lewej najnowsze)</TextBracket>
+        Historia sprzedaży <TextBracket>(od lewej najnowsze)</TextBracket>
       </ChartTitle>
       <ChartContainer>
         <ChartLine
