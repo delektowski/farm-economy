@@ -163,16 +163,7 @@ const FruitContainer = ({
             handleOnFocus={handleOnFocus}
             handleOnBlur={handleOnBlur}
           />
-          <PriceInput
-            title="Ostatnia sprzedaż"
-            placeholder="cena"
-            fruitName={fruitName}
-            value={sellPrice}
-            handleOnChange={handleSellPrice}
-            handleOnKeyUp={handleChangeChart}
-            handleOnFocus={handleOnFocus}
-            handleOnBlur={handleOnBlur}
-          />
+
           <CheckboxInput
             title="Podlewanie"
             handleOnChange={handleWateringCheckbox}
@@ -193,13 +184,25 @@ const FruitContainer = ({
             <strong>Zysk z pola: </strong>
             {((price * fruitCrop) / fieldMultiplier).toFixed(2)} kt
           </p>
+          <PriceInput
+              title="Cena ostatniej sprzedaży"
+              placeholder="cena"
+              fruitName={fruitName}
+              value={sellPrice}
+              handleOnChange={handleSellPrice}
+              handleOnKeyUp={handleChangeChart}
+              handleOnFocus={handleOnFocus}
+              handleOnBlur={handleOnBlur}
+          />
           <Chart
             fruitName={fruitName}
             sellPrice={sellPrice}
             isChangeSellPrice={isChangeSellPriceHistory}
             resetIsChangeSellPrice={handleResetIsChangeSellPrice}
             isResetDeleteColumnButton={isResetDeleteColumnButton}
-          />
+          >
+
+          </Chart>
         </section>
       </label>
     </div>

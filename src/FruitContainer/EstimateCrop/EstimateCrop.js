@@ -18,6 +18,10 @@ const EstimateCrop = ({ croppingTime }) => {
       return minutes.toString().length > 1 ? minutes : `0${minutes}`;
     };
 
+    const getMonthAsTwoCharacters = month => {
+      return month.toString().length > 1 ? month : `0${month}`;
+    }
+
     const getDateEstimated = () => {
       return new Date(dateNow + getMillisecondsFromMinutes(croppingTime));
     };
@@ -27,11 +31,11 @@ const EstimateCrop = ({ croppingTime }) => {
     const year = getDateEstimated()
       .getUTCFullYear()
       .toString()
-      .substr(-2);
+      .substr();
     const hour = getDateEstimated().getHours();
     const minutes = getDateEstimated().getMinutes();
 
-    return `${day}.${month}.${year} godz. ${hour}:${getMinutesAsTwoCharacters(
+    return `${day}.${getMonthAsTwoCharacters(month)}.${year} godz. ${hour}:${getMinutesAsTwoCharacters(
       minutes,
     )}`;
   };
