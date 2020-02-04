@@ -36,7 +36,7 @@ const ChartContainer = styled.div`
   margin-bottom: 0.3rem;
   display: flex;
   align-items: flex-end;
-  width: 11rem;
+  width: 14rem;
   height: 3rem;
   border-left: 1px solid black;
   border-bottom: 1px solid black;
@@ -123,8 +123,8 @@ const Chart = ({
     const sellPriceHistoryCopy = { ...sellPriceHistory };
 
     const setNewColumn = () => {
-      if (Object.keys(sellPriceHistoryCopy).length > 3) {
-        delete sellPriceHistoryCopy.price3;
+      if (Object.keys(sellPriceHistoryCopy).length > 4) {
+        delete sellPriceHistoryCopy.price4;
       }
       return Object.keys(sellPriceHistoryCopy).reduce(
         (total, item, i) => {
