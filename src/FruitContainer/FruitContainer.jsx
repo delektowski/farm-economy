@@ -186,7 +186,7 @@ const FruitContainer = ({
           </p>
           <PriceInput
               title="Cena ostatniej sprzedaży"
-              placeholder="cena"
+              placeholder="ostatnia cena"
               fruitName={fruitName}
               value={sellPrice}
               handleOnChange={handleSellPrice}

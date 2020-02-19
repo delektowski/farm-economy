@@ -4,11 +4,11 @@ const PriceInput = ({fruitName, value, handleOnChange, handleOnKeyUp, handleOnFo
 
     return (
         <div className="CheckoboxPriceContainer">
-            <p className="Paragraph">
+            <label htmlFor={fruitName+placeholder} className="Paragraph">
                 <strong>{title}: </strong>
-            </p>
+            </label>
             <input
-                id={fruitName}
+                id={fruitName+placeholder}
                 placeholder={placeholder}
                 className="PriceField"
                 type="number"

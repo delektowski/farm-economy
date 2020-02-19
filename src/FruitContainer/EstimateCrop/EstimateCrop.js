@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import EstimationTimeInput from './EstimationTimeInput/EstimationTimeInput';
 
 const EstimateCrop = ({ croppingTime }) => {
   const [dateNow, setDateNow] = useState(Date.now());
+  const [timeOfEstimation, setTimeOfEstimation] = useState({
+    hours: new Date(dateNow).getHours(),
+    min: new Date(dateNow).getMinutes(),
+  });
 
   useEffect(() => {
     setInterval(() => {
       setDateNow(Date.now());
     }, 60000);
   }, []);
-
   const getEstimatedCropTime = () => {
     const getMillisecondsFromMinutes = minutes => {
       return minutes * 60000;
@@ -20,10 +24,15 @@ const EstimateCrop = ({ croppingTime }) => {
 
     const getMonthAsTwoCharacters = month => {
       return month.toString().length > 1 ? month : `0${month}`;
-    }
+    };
 
     const getDateEstimated = () => {
-      return new Date(dateNow + getMillisecondsFromMinutes(croppingTime));
+      const time = new Date();
+      console.log("timeOfEstimation", timeOfEstimation)
+      time.setHours(timeOfEstimation.hours, timeOfEstimation.min, 0);
+      return new Date(
+        time.getTime() + getMillisecondsFromMinutes(croppingTime),
+      );
     };
 
     const day = getDateEstimated().getUTCDate();
@@ -35,15 +44,26 @@ const EstimateCrop = ({ croppingTime }) => {
     const hour = getDateEstimated().getHours();
     const minutes = getDateEstimated().getMinutes();
 
-    return `${day}.${getMonthAsTwoCharacters(month)}.${year} godz. ${hour}:${getMinutesAsTwoCharacters(
-      minutes,
-    )}`;
+    return `${day}.${getMonthAsTwoCharacters(
+      month,
+    )}.${year} godz. ${hour}:${getMinutesAsTwoCharacters(minutes)}`;
+  };
+
+  const handleSetTimeToEstimate = timeToEstimate => {
+    console.log("timeToEstimate", timeToEstimate)
+    setTimeOfEstimation();
   };
 
   return (
-    <p className="Paragraph">
-      <strong>Czas zbioru: </strong> {getEstimatedCropTime()}
-    </p>
+    <React.Fragment>
+      <EstimationTimeInput
+        dateNow={dateNow}
+        onSetTimeToEstimate={handleSetTimeToEstimate}
+      />
+      <p className="Paragraph">
+        <strong>Czas zbioru: </strong> {getEstimatedCropTime()}
+      </p>
+    </React.Fragment>
   );
 };
 
