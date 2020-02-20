@@ -100,7 +100,7 @@ const Chart = ({
   const sendDataToFirebase = data => {
     firebase
       .database()
-      .ref(`plants/${changeDiacriticToStandard(fruitName)}`)
+      .ref(`plants/${changeDiacriticToStandard(fruitName)}/chartPrices`)
       .set(data);
   };
 
@@ -143,7 +143,7 @@ const Chart = ({
   useEffect(() => {
     const plantsData = firebase
       .database()
-      .ref(`plants/${changeDiacriticToStandard(fruitName)}`);
+      .ref(`plants/${changeDiacriticToStandard(fruitName)}/chartPrices`);
     plantsData.on('value', function(snapshot) {
       if (snapshot.val() !== null) {
         setSellPriceHistory(snapshot.val());

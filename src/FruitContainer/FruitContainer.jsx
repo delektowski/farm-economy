@@ -4,6 +4,7 @@ import Chart from './Chart/Chart';
 import PriceInput from './PriceInput/PriceInput';
 import CheckboxInput from './CheckboxInput/CheckboxInput';
 import EstimateCrop from './EstimateCrop/EstimateCrop';
+import ResellPrice from './ResellPrice/ResellPrice';
 
 const FruitContainer = ({
   fruitName,
@@ -153,6 +154,13 @@ const FruitContainer = ({
             <strong>Plon: </strong>
             {`${fruitCrop} szt.`}
           </p>
+
+          <ResellPrice
+            fruitName={fruitName}
+            handleOnFocus={handleOnFocus}
+            handleOnBlur={handleOnBlur}
+          />
+
           <PriceInput
             title="Cena za sztukę"
             placeholder="cena"
@@ -185,14 +193,14 @@ const FruitContainer = ({
             {((price * fruitCrop) / fieldMultiplier).toFixed(2)} kt
           </p>
           <PriceInput
-              title="Cena ostatniej sprzedaży"
-              placeholder="cena"
-              fruitName={fruitName}
-              value={sellPrice}
-              handleOnChange={handleSellPrice}
-              handleOnKeyUp={handleChangeChart}
-              handleOnFocus={handleOnFocus}
-              handleOnBlur={handleOnBlur}
+            title="Cena ostatniej sprzedaży"
+            placeholder="cena"
+            fruitName={fruitName}
+            value={sellPrice}
+            handleOnChange={handleSellPrice}
+            handleOnKeyUp={handleChangeChart}
+            handleOnFocus={handleOnFocus}
+            handleOnBlur={handleOnBlur}
           />
           <Chart
             fruitName={fruitName}
@@ -200,9 +208,7 @@ const FruitContainer = ({
             isChangeSellPrice={isChangeSellPriceHistory}
             resetIsChangeSellPrice={handleResetIsChangeSellPrice}
             isResetDeleteColumnButton={isResetDeleteColumnButton}
-          >
-
-          </Chart>
+          ></Chart>
         </section>
       </label>
     </div>
