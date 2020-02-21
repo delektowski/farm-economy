@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PriceInput from '../PriceInput/PriceInput';
 import firebase from 'firebase/app';
 
 import { changeDiacriticToStandard } from '../../lib/helper';
@@ -18,7 +17,6 @@ const resellPrice = ({ fruitName, handleOnFocus, handleOnBlur }) => {
   const handleResellPrice = (e, range) => {
     const newResellPrice = e.target.value;
     setResellPrice({ ...resellPrice, [range]: newResellPrice });
-    console.log("resellPrice", resellPrice)
     sendDataToFirebase(newResellPrice, range);
   };
 
@@ -31,7 +29,6 @@ const resellPrice = ({ fruitName, handleOnFocus, handleOnBlur }) => {
       if (snapshot.val() !== null) {
         const min = snapshot.val().min;
         const max = snapshot.val().max;
-        console.log("max", max)
         setResellPrice({ min, max });
       }
     });

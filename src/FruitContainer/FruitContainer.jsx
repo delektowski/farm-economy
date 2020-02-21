@@ -57,7 +57,6 @@ const FruitContainer = ({
 
   const handlePrice = e => {
     const newPrice = e.target.value;
-    console.log("newPrice", newPrice)
     setPrice(newPrice);
   };
 
@@ -209,7 +208,7 @@ const FruitContainer = ({
             isChangeSellPrice={isChangeSellPriceHistory}
             resetIsChangeSellPrice={handleResetIsChangeSellPrice}
             isResetDeleteColumnButton={isResetDeleteColumnButton}
-          ></Chart>
+          />
         </section>
       </label>
     </div>
