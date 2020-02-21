@@ -144,6 +144,7 @@ const Chart = ({
     const plantsData = firebase
       .database()
       .ref(`plants/${changeDiacriticToStandard(fruitName)}/chartPrices`);
+
     plantsData.on('value', function(snapshot) {
       if (snapshot.val() !== null) {
         setSellPriceHistory(snapshot.val());

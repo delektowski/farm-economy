@@ -57,6 +57,7 @@ const FruitContainer = ({
 
   const handlePrice = e => {
     const newPrice = e.target.value;
+    console.log("newPrice", newPrice)
     setPrice(newPrice);
   };
 
