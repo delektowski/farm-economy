@@ -193,7 +193,7 @@ const FruitContainer = ({
             {((price * fruitCrop) / fieldMultiplier).toFixed(2)} kt
           </p>
           <PriceInput
-            title="Cena ostatniej sprzedaży"
+            title="Cena ost. sprzedaży"
             placeholder="cena"
             fruitName={fruitName}
             value={sellPrice}
