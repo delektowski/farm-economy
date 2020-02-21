@@ -12,13 +12,12 @@ const resellPriceRange = ({
   placeholder,
 }) => {
   return (
-    <div className="CheckoboxPriceContainer">
+    <div className="ResellPriceContainer">
       <p className="Paragraph">
         <strong>{title}: </strong>
       </p>
       <p className="PriceDescription">min </p>
       <input
-        id={fruitName}
         placeholder={placeholder}
         className="PriceField"
         type="number"

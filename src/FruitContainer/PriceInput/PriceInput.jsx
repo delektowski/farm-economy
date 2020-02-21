@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PriceInput = ({fruitName, value, handleOnChange, handleOnKeyUp, handleOnFocus, handleOnBlur, title, placeholder}) => {
+const PriceInput = ({value, handleOnChange, handleOnKeyUp, handleOnFocus, handleOnBlur, title, placeholder}) => {
 
     return (
         <div className="CheckoboxPriceContainer">
@@ -8,7 +8,6 @@ const PriceInput = ({fruitName, value, handleOnChange, handleOnKeyUp, handleOnFo
                 <strong>{title}: </strong>
             </p>
             <input
-                id={fruitName}
                 placeholder={placeholder}
                 className="PriceField"
                 type="number"
