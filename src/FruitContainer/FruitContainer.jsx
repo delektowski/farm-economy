@@ -200,7 +200,11 @@ const FruitContainer = ({
           resetIsChangeSellPrice={handleResetIsChangeSellPrice}
           isResetDeleteColumnButton={isResetDeleteColumnButton}
         />
-        <ResellPrice fruitName={fruitName} />
+        <ResellPrice
+          handleOnFocus={handleOnFocus}
+          handleOnBlur={handleOnBlur}
+          fruitName={fruitName}
+        />
       </section>
     </div>
   );
