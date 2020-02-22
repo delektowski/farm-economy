@@ -1,17 +1,45 @@
 import React, { useState, useEffect } from 'react';
 
-const EstimationTimeInput = ({ dateNow, onSetTimeToEstimate }) => {
+const EstimationTimeInput = ({
+  dateNow,
+  onSetTimeToEstimateHour,
+  onSetTimeToEstimateMinutes,
+}) => {
   const [hour, setHour] = useState(new Date(dateNow).getHours());
   const [minutes, setMinutes] = useState(new Date(dateNow).getMinutes());
-  const handleOnChangeHour = e => {
-    setHour(e.target.value);
+
+  const isHours = val => {
+    if (val > 23) {
+      return 23;
+    }
+    if (val < 0) {
+      return 0;
+    }
+    return val;
   };
+
+  const handleOnChangeHour = e => {
+    const hour = e.target.value;
+    setHour(isHours(hour));
+  };
+
+  const isMinutes = val => {
+    if (val > 59) {
+      return 59;
+    }
+    if (val < 0) {
+      return 0;
+    }
+    return val;
+  };
+
   const handleOnChangeMinutes = e => {
-    setMinutes(e.target.value);
+    const minutes = e.target.value;
+    setMinutes(isMinutes(minutes));
   };
   useEffect(() => {
-      console.log("hour", hour)
-      onSetTimeToEstimate({hour, minutes});
+    onSetTimeToEstimateHour(hour);
+    onSetTimeToEstimateMinutes(minutes);
   }, [hour, minutes]);
 
   return (

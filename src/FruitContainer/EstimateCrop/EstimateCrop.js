@@ -3,10 +3,12 @@ import EstimationTimeInput from './EstimationTimeInput/EstimationTimeInput';
 
 const EstimateCrop = ({ croppingTime }) => {
   const [dateNow, setDateNow] = useState(Date.now());
-  const [timeOfEstimation, setTimeOfEstimation] = useState({
-    hours: new Date(dateNow).getHours(),
-    min: new Date(dateNow).getMinutes(),
-  });
+  const [timeOfEstimationHour, setTimeOfEstimationHour] = useState(
+    new Date(dateNow).getHours(),
+  );
+  const [timeOfEstimationMinutes, setTimeOfEstimationMinutes] = useState(
+    new Date(dateNow).getMinutes(),
+  );
 
   useEffect(() => {
     setInterval(() => {
@@ -28,8 +30,8 @@ const EstimateCrop = ({ croppingTime }) => {
 
     const getDateEstimated = () => {
       const time = new Date();
-      console.log("timeOfEstimation", timeOfEstimation)
-      time.setHours(timeOfEstimation.hours, timeOfEstimation.min, 0);
+
+      time.setHours(timeOfEstimationHour, timeOfEstimationMinutes, 0);
       return new Date(
         time.getTime() + getMillisecondsFromMinutes(croppingTime),
       );
@@ -49,16 +51,20 @@ const EstimateCrop = ({ croppingTime }) => {
     )}.${year} godz. ${hour}:${getMinutesAsTwoCharacters(minutes)}`;
   };
 
-  const handleSetTimeToEstimate = timeToEstimate => {
-    console.log("timeToEstimate", timeToEstimate)
-    setTimeOfEstimation();
+  const handleSetTimeToEstimateHour = hourToEstimate => {
+    setTimeOfEstimationHour(hourToEstimate);
+  };
+
+  const handleSetTimeToEstimateMinutes = minutesToEstimate => {
+    setTimeOfEstimationMinutes(minutesToEstimate);
   };
 
   return (
     <React.Fragment>
       <EstimationTimeInput
         dateNow={dateNow}
-        onSetTimeToEstimate={handleSetTimeToEstimate}
+        onSetTimeToEstimateHour={handleSetTimeToEstimateHour}
+        onSetTimeToEstimateMinutes={handleSetTimeToEstimateMinutes}
       />
       <p className="Paragraph">
         <strong>Czas zbioru: </strong> {getEstimatedCropTime()}
