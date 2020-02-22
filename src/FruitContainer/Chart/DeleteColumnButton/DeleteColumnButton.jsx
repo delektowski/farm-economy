@@ -27,14 +27,14 @@ const DeleteColumn = ({ columnKey, fruitName, columnsAmount }) => {
     const setFirstColumnToZero = { price0: 0 };
     firebase
       .database()
-      .ref(`plants/${changeDiacriticToStandard(fruitName)}`)
+      .ref(`plants/${changeDiacriticToStandard(fruitName)}/chartPrices`)
       .set(setFirstColumnToZero);
   };
 
   const handleDeleteColumn = () => {
     firebase
       .database()
-      .ref(`plants/${changeDiacriticToStandard(fruitName)}/${columnKey}`)
+      .ref(`plants/${changeDiacriticToStandard(fruitName)}/chartPrices/${columnKey}`)
       .remove(() => {
         if (columnsAmount < 2) {
           sendDataToFirebase();

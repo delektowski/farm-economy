@@ -4,6 +4,7 @@ import Chart from './Chart/Chart';
 import PriceInput from './PriceInput/PriceInput';
 import CheckboxInput from './CheckboxInput/CheckboxInput';
 import EstimateCrop from './EstimateCrop/EstimateCrop';
+import ResellPrice from './ResellPrice/ResellPrice';
 
 const FruitContainer = ({
   fruitName,
@@ -130,81 +131,81 @@ const FruitContainer = ({
 
   return (
     <div>
-      <label htmlFor={fruitName}>
-        <section
-          onClick={handleHideDeleteColumnButton}
-          className={
-            isFocus
-              ? ['FruitContainer', 'Focused'].join(' ')
-              : ['FruitContainer']
-          }
-        >
-          <h3 className="OrderNumber">{index}</h3>
-          <div className="ContainerTitle">
-            <div style={image} />
-            <h2 className="Title">{fruitName}</h2>
-          </div>
+      <section
+        onClick={handleHideDeleteColumnButton}
+        className={
+          isFocus ? ['FruitContainer', 'Focused'].join(' ') : ['FruitContainer']
+        }
+      >
+        <h3 className="OrderNumber">{index}</h3>
+        <div className="ContainerTitle">
+          <div style={image} />
+          <h2 className="Title">{fruitName}</h2>
+        </div>
 
-          <p className="Paragraph">
-            <strong>Czas uprawy: </strong> {getCroppingTimeHoursAndMinute()}
-          </p>
-          <EstimateCrop croppingTime={croppingTime} />
-          <p className="Paragraph">
-            <strong>Plon: </strong>
-            {`${fruitCrop} szt.`}
-          </p>
-          <PriceInput
-            title="Cena za sztukę"
-            placeholder="cena"
-            fruitName={fruitName}
-            value={price}
-            handleOnChange={handlePrice}
-            handleOnKeyUp={handleChangeProfit}
-            handleOnFocus={handleOnFocus}
-            handleOnBlur={handleOnBlur}
-          />
+        <p className="Paragraph">
+          <strong>Czas uprawy: </strong> {getCroppingTimeHoursAndMinute()}
+        </p>
+        <EstimateCrop croppingTime={croppingTime} />
+        <p className="Paragraph">
+          <strong>Plon: </strong>
+          {`${fruitCrop} szt.`}
+        </p>
 
-          <CheckboxInput
-            title="Podlewanie"
-            handleOnChange={handleWateringCheckbox}
-            handleOnFocus={handleOnFocus}
-            handleOnBlur={handleOnBlur}
-          />
-          <PriceInput
-            title="Zysk na godzinę"
-            placeholder="zysk"
-            fruitName={fruitName}
-            value={fruitProfit}
-            handleOnChange={handleProfitOnHour}
-            handleOnKeyUp={e => handleChangeSortingOnProfitChange(e)}
-            handleOnFocus={handleOnFocus}
-            handleOnBlur={handleOnBlur}
-          />
-          <p className="Paragraph">
-            <strong>Zysk z pola: </strong>
-            {((price * fruitCrop) / fieldMultiplier).toFixed(2)} kt
-          </p>
-          <PriceInput
-              title="Cena ostatniej sprzedaży"
-              placeholder="ostatnia cena"
-              fruitName={fruitName}
-              value={sellPrice}
-              handleOnChange={handleSellPrice}
-              handleOnKeyUp={handleChangeChart}
-              handleOnFocus={handleOnFocus}
-              handleOnBlur={handleOnBlur}
-          />
-          <Chart
-            fruitName={fruitName}
-            sellPrice={sellPrice}
-            isChangeSellPrice={isChangeSellPriceHistory}
-            resetIsChangeSellPrice={handleResetIsChangeSellPrice}
-            isResetDeleteColumnButton={isResetDeleteColumnButton}
-          >
+        <PriceInput
+          title="Cena za sztukę"
+          placeholder="cena"
+          fruitName={fruitName}
+          value={price}
+          handleOnChange={handlePrice}
+          handleOnKeyUp={handleChangeProfit}
+          handleOnFocus={handleOnFocus}
+          handleOnBlur={handleOnBlur}
+        />
 
-          </Chart>
-        </section>
-      </label>
+        <CheckboxInput
+          title="Podlewanie"
+          handleOnChange={handleWateringCheckbox}
+          handleOnFocus={handleOnFocus}
+          handleOnBlur={handleOnBlur}
+        />
+        <PriceInput
+          title="Zysk na godzinę"
+          placeholder="zysk"
+          fruitName={fruitName}
+          value={fruitProfit}
+          handleOnChange={handleProfitOnHour}
+          handleOnKeyUp={e => handleChangeSortingOnProfitChange(e)}
+          handleOnFocus={handleOnFocus}
+          handleOnBlur={handleOnBlur}
+        />
+        <p className="Paragraph">
+          <strong>Zysk z pola: </strong>
+          {((price * fruitCrop) / fieldMultiplier).toFixed(2)} kt
+        </p>
+        <PriceInput
+          title="Cena ost. sprzedaży"
+          placeholder="cena"
+          fruitName={fruitName}
+          value={sellPrice}
+          handleOnChange={handleSellPrice}
+          handleOnKeyUp={handleChangeChart}
+          handleOnFocus={handleOnFocus}
+          handleOnBlur={handleOnBlur}
+        />
+        <Chart
+          fruitName={fruitName}
+          sellPrice={sellPrice}
+          isChangeSellPrice={isChangeSellPriceHistory}
+          resetIsChangeSellPrice={handleResetIsChangeSellPrice}
+          isResetDeleteColumnButton={isResetDeleteColumnButton}
+        />
+        <ResellPrice
+          handleOnFocus={handleOnFocus}
+          handleOnBlur={handleOnBlur}
+          fruitName={fruitName}
+        />
+      </section>
     </div>
   );
 };

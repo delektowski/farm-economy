@@ -1,14 +1,13 @@
 import React from 'react'
 
-const PriceInput = ({fruitName, value, handleOnChange, handleOnKeyUp, handleOnFocus, handleOnBlur, title, placeholder}) => {
+const PriceInput = ({value, handleOnChange, handleOnKeyUp, handleOnFocus, handleOnBlur, title, placeholder}) => {
 
     return (
         <div className="CheckoboxPriceContainer">
-            <label htmlFor={fruitName+placeholder} className="Paragraph">
+            <p className="Paragraph">
                 <strong>{title}: </strong>
-            </label>
+            </p>
             <input
-                id={fruitName+placeholder}
                 placeholder={placeholder}
                 className="PriceField"
                 type="number"

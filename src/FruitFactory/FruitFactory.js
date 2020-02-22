@@ -42,6 +42,8 @@ export const fruitFactory = [
   new Fruit('Róża', 420, 2, 4.10, 1, '90.5%', '10.2%'),
   new Fruit('Szparagi', 2520, 5, 7.80, 2, '90.5%', '2.5%'),
   new Fruit('Sałata', 14, 2, 0.08, 1, '9.7%', '-0.1%'),
-  new Fruit('Jabłka', 5760, 12, 30.96, 4, '30%', '-0.1%'),
+  new Fruit('Jabłko', 5760, 12, 30.96, 4, '30%', '-0.1%'),
   new Fruit('Dynia', 8640, 6, 22.80, 1, '70%', '2.5%'),
+  new Fruit('Wiśnia', 11520, 18, 41.40, 4, '0%', '0%'),
+  new Fruit('Gruszka', 7200, 10, 46.80, 4, '0%', '5%'),
 ];
