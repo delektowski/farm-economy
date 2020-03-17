@@ -48,7 +48,4 @@ export const fruitFactory = [
   new Fruit('Gruszka', 7200, 10, 46.80, 4, '0%', '5%'),
   new Fruit('Winogrona', 720, 2, 22.10, 2, '0%', '18%'),
   new Fruit('Śliwki', 14400, 15, 62.40, 4, '20%', '2.5%'),
-
-// sliw 240h, kt 62,40 plon 15, zajmują pola 4
-  // Winogrona rosna 12 h kosztuja 22.10kt daja dwa plony i zajmuja dwa pola
 ];
