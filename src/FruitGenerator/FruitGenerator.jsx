@@ -20,21 +20,17 @@ const FruitGenerator = () => {
     return ((fruitPrice * fruitCrop) / hourMultiplier).toFixed(2);
   };
 
-  const getSubtractionSum = (i, j) => {
-    return (
-      getProfitPerHour(j.fruitCroppingTime, j.fruitPrice, j.fruitCrop) -
-      getProfitPerHour(i.fruitCroppingTime, i.fruitPrice, i.fruitCrop)
-    );
-  };
-
   const getSortedFruitsPerProfit = () => {
     return fruitList.sort((i, j) => {
-      return getSubtractionSum(i, j);
+      return (
+        getProfitPerHour(j.fruitCroppingTime, j.fruitPrice, j.fruitCrop) -
+        getProfitPerHour(i.fruitCroppingTime, i.fruitPrice, i.fruitCrop)
+      );
     });
   };
 
-  const sortedFruitsAndProfit = () => {
-    return getSortedFruitsPerProfit().map(fruitSorted => {
+  const sortedFruits = () => {
+    return sortedFruitsCroppingTime().map(fruitSorted => {
       const copyFruitSorted = { ...fruitSorted };
       copyFruitSorted.profit = +getProfitPerHour(
         copyFruitSorted.fruitCroppingTime,
@@ -45,11 +41,23 @@ const FruitGenerator = () => {
     });
   };
 
+  const sortedFruitsAlphabetically = () => {
+    return fruitList.sort((i, j) => {
+      return i.fruitName.localeCompare(j.fruitName);
+    });
+  };
+
+  const sortedFruitsCroppingTime = () => {
+    return fruitList.sort((i, j) => {
+      return i.fruitCroppingTime - j.fruitCroppingTime;
+    });
+  };
+
   return (
     <div className="ContentContainer">
       <h1 className="Header">Działkowe inwestycje</h1>
       <div className="AppContainer">
-        {sortedFruitsAndProfit().map((fruit, i) => {
+        {sortedFruits().map((fruit, i) => {
           return (
             <FruitContainer
               index={i + 1}
