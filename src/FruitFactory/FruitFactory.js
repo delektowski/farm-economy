@@ -49,5 +49,5 @@ export const fruitFactory = [
   new Fruit('Winogrona', 720, 2, 22.1, 2, '0%', '18%'),
   new Fruit('Śliwki', 14400, 15, 62.4, 4, '20%', '2.5%'),
   new Fruit('Bazylia', 1080, 3, 8.95, 1, '10.3%', '17.9%'),
-    new Fruit( 'Orzech', 20160, 19, 64.40, 4, '0%', '18%')
+    new Fruit( 'Orzech', 20160, 19, 64.40, 4, '80.5%', '2.5%')
 ];
