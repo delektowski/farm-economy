@@ -11,7 +11,8 @@ const FruitGenerator = () => {
   const selectOptions = [
     selectOpt.ALFABETYCZNIE,
     selectOpt.CENA_ZA_SZTUKE,
-    selectOpt.CZAS_UPRAWY,
+    selectOpt.CZAS_UPRAWY_MAX,
+    selectOpt.CZAS_UPRAWY_MIN,
     selectOpt.ZYSK_NA_GODZINE,
     selectOpt.ZYSK_Z_POLA,
   ];
@@ -47,9 +48,11 @@ const FruitGenerator = () => {
     });
   };
 
-  const getSortedFruitsCroppingTime = () => {
+  const getSortedFruitsCroppingTime = isMax => {
     return fruitList.sort((i, j) => {
-      return j.fruitCroppingTime - i.fruitCroppingTime;
+      return isMax
+        ? j.fruitCroppingTime - i.fruitCroppingTime
+        : i.fruitCroppingTime - j.fruitCroppingTime;
     });
   };
 
@@ -76,8 +79,11 @@ const FruitGenerator = () => {
       if (selectedOption === selectOpt.ZYSK_NA_GODZINE) {
         return getSortedFruitsProfitPerHour();
       }
-      if (selectedOption === selectOpt.CZAS_UPRAWY) {
-        return getSortedFruitsCroppingTime();
+      if (selectedOption === selectOpt.CZAS_UPRAWY_MAX) {
+        return getSortedFruitsCroppingTime(true);
+      }
+      if (selectedOption === selectOpt.CZAS_UPRAWY_MIN) {
+        return getSortedFruitsCroppingTime(false);
       }
       if (selectedOption === selectOpt.ZYSK_Z_POLA) {
         return getSortedFruitsFieldProfit();

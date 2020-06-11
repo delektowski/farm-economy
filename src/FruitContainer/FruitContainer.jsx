@@ -26,6 +26,7 @@ const FruitContainer = ({
     backgroundPosition: `${imgPositionX} ${imgPositionY}`,
     width: '2.7rem',
     height: '2.7rem',
+    boxShadow: '0 2px 4px 2px rgba(0, 0, 0, 0.35)',
   };
 
   const [price, setPrice] = useState(fruitPrice);
