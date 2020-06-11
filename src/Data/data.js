@@ -1,1 +1,0 @@
-export const chartData = [3, 2, 5.5, 2.4];

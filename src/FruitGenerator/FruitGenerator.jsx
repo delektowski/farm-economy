@@ -1,9 +1,21 @@
 import React, { useState } from 'react';
 import { fruitFactory } from '../FruitFactory/FruitFactory';
 import FruitContainer from '../FruitContainer/FruitContainer';
+import * as selectOpt from '../lib/enums';
 
 const FruitGenerator = () => {
   const [fruitList, setFruitList] = useState(fruitFactory);
+  const [selectedOption, setSelectedOption] = useState(
+    selectOpt.ZYSK_NA_GODZINE,
+  );
+  const selectOptions = [
+    selectOpt.ALFABETYCZNIE,
+    selectOpt.CENA_ZA_SZTUKE,
+    selectOpt.CZAS_UPRAWY,
+    selectOpt.ZYSK_NA_GODZINE,
+    selectOpt.ZYSK_Z_POLA,
+  ];
+
   const handleChangeFruitProperty = (fruitName, newValue, property) => {
     const changedFruitList = fruitList.map(fruit => {
       const fruitCopy = { ...fruit };
@@ -20,7 +32,7 @@ const FruitGenerator = () => {
     return ((fruitPrice * fruitCrop) / hourMultiplier).toFixed(2);
   };
 
-  const getSortedFruitsPerProfit = () => {
+  const getSortedFruitsProfitPerHour = () => {
     return fruitList.sort((i, j) => {
       return (
         getProfitPerHour(j.fruitCroppingTime, j.fruitPrice, j.fruitCrop) -
@@ -29,8 +41,53 @@ const FruitGenerator = () => {
     });
   };
 
+  const getSortedFruitsAlphabetically = () => {
+    return fruitList.sort((i, j) => {
+      return i.fruitName.localeCompare(j.fruitName);
+    });
+  };
+
+  const getSortedFruitsCroppingTime = () => {
+    return fruitList.sort((i, j) => {
+      return j.fruitCroppingTime - i.fruitCroppingTime;
+    });
+  };
+
+  const getSortedFruitsFieldProfit = () => {
+    return fruitList.sort((i, j) => {
+      return (
+        (j.fruitPrice * j.fruitCrop) / j.fieldMultiplier -
+        (i.fruitPrice * i.fruitCrop) / i.fieldMultiplier
+      );
+    });
+  };
+
+  const getSortedFruitsPerPrice = () => {
+    return fruitList.sort((i, j) => {
+      return j.fruitPrice - i.fruitPrice;
+    });
+  };
+
   const sortedFruits = () => {
-    return sortedFruitsCroppingTime().map(fruitSorted => {
+    const getSortedFruitsAccordingToType = () => {
+      if (selectedOption === selectOpt.ALFABETYCZNIE) {
+        return getSortedFruitsAlphabetically();
+      }
+      if (selectedOption === selectOpt.ZYSK_NA_GODZINE) {
+        return getSortedFruitsProfitPerHour();
+      }
+      if (selectedOption === selectOpt.CZAS_UPRAWY) {
+        return getSortedFruitsCroppingTime();
+      }
+      if (selectedOption === selectOpt.ZYSK_Z_POLA) {
+        return getSortedFruitsFieldProfit();
+      }
+      if (selectedOption === selectOpt.CENA_ZA_SZTUKE) {
+        return getSortedFruitsPerPrice();
+      }
+    };
+
+    return getSortedFruitsAccordingToType().map(fruitSorted => {
       const copyFruitSorted = { ...fruitSorted };
       copyFruitSorted.profit = +getProfitPerHour(
         copyFruitSorted.fruitCroppingTime,
@@ -38,18 +95,6 @@ const FruitGenerator = () => {
         copyFruitSorted.fruitCrop,
       );
       return copyFruitSorted;
-    });
-  };
-
-  const sortedFruitsAlphabetically = () => {
-    return fruitList.sort((i, j) => {
-      return i.fruitName.localeCompare(j.fruitName);
-    });
-  };
-
-  const sortedFruitsCroppingTime = () => {
-    return fruitList.sort((i, j) => {
-      return i.fruitCroppingTime - j.fruitCroppingTime;
     });
   };
 
@@ -71,6 +116,9 @@ const FruitGenerator = () => {
               imgPositionX={fruit.positionX}
               imgPositionY={fruit.positionY}
               handleChangeFruitProperty={handleChangeFruitProperty}
+              selectedOption={selectedOption}
+              setSelectedOption={setSelectedOption}
+              selectOptions={selectOptions}
             />
           );
         })}

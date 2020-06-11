@@ -17,11 +17,13 @@ const FruitContainer = ({
   imgPositionX,
   imgPositionY,
   index,
+  selectedOption,
+  setSelectedOption,
+  selectOptions,
 }) => {
   const image = {
     background: `url(${img})`,
     backgroundPosition: `${imgPositionX} ${imgPositionY}`,
-    marginLeft: '1.5rem',
     width: '2.7rem',
     height: '2.7rem',
   };
@@ -137,10 +139,33 @@ const FruitContainer = ({
           isFocus ? ['FruitContainer', 'Focused'].join(' ') : ['FruitContainer']
         }
       >
-        <h3 className="OrderNumber">{index}</h3>
         <div className="ContainerTitle">
           <div style={image} />
           <h2 className="Title">{fruitName}</h2>
+        </div>
+
+        <div className="sortingContainer">
+          <button className="OrderNumber">
+            <h3>{index}</h3>
+          </button>
+
+          <select
+            value={selectedOption}
+            onChange={e => {
+              setSelectedOption(e.target.value);
+            }}
+            className="selectWindow"
+            name="pets"
+            id="pet-select"
+          >
+            {selectOptions.map(selectItem => {
+              return (
+                <option key={selectItem} value={selectItem}>
+                  {selectItem}
+                </option>
+              );
+            })}
+          </select>
         </div>
 
         <p className="Paragraph">
