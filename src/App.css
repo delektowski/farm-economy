@@ -122,7 +122,7 @@ html {
   width: 2.5rem;
   display: flex;
   justify-content: center;
-  align-items: center;
+  
   border-radius: 80%;
   border: none;
   background: #94dc00;
@@ -135,7 +135,10 @@ html {
 
 .OrderNumber h3 {
   color: #3f3f3f;
-  font-size: 0.9rem;
+  font-size: .9rem;
+  /*display: inline-block;*/
+  margin: 50% 0 0;
+  transform: translateY(-50%);
 }
 
 .PriceDescription {
