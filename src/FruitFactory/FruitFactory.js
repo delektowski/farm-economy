@@ -19,19 +19,19 @@ class Fruit {
 }
 
 export const fruitFactory = [
-  new Fruit('Truskawka', 120, 4, 0.44, 1, '20%', '0%'),
-  new Fruit('Pomidor', 140, 4, 0.5, 1, '40%', '-0.1%'),
+  new Fruit('Truskawki', 120, 4, 0.44, 1, '20%', '0%'),
+  new Fruit('Pomidory', 140, 4, 0.5, 1, '40%', '-0.1%'),
   new Fruit('Szpinak', 560, 4, 2.1, 1, '49.78%', '7.6%'),
-  new Fruit('Cebula', 480, 4, 1.76, 1, '80.3%', '-0.2%'),
+  new Fruit('Cebule', 480, 4, 1.76, 1, '80.3%', '-0.2%'),
   new Fruit('Kalafior', 1000, 4, 3, 1, '9.9%', '7.6%'),
-  new Fruit('Ziemniak', 960, 4, 3, 1, '9.9%', '5%'),
+  new Fruit('Ziemniaki', 960, 4, 3, 1, '9.9%', '5%'),
   new Fruit('Czosnek', 1320, 4, 5.1, 1, '40%', '7.65%'),
   new Fruit('Papryka', 2400, 5, 7, 1, '40%', '2.5%'),
-  new Fruit('Brokuł', 1200, 4, 4.48, 1, '20%', '7.6%'),
+  new Fruit('Brokuły', 1200, 4, 4.48, 1, '20%', '7.6%'),
   new Fruit('Oberżyna', 2880, 5, 8.88, 1, '60.3%', '0%'),
   new Fruit('Cukinia', 2880, 4, 11, 1, '50%', '2.5%'),
-  new Fruit('Malina', 2880, 5, 7.6, 1, '90.4%', '0%'),
-  new Fruit('Jagoda', 1920, 6, 5.04, 1, '30%', '7.7%'),
+  new Fruit('Maliny', 2880, 5, 7.6, 1, '90.4%', '0%'),
+  new Fruit('Jagody', 1920, 6, 5.04, 1, '30%', '7.7%'),
   new Fruit('Słonecznik', 300, 3, 1.85, 1, '70.5%', '10.2%'),
   new Fruit('Nagietki', 360, 4, 2, 1, '80.5%', '10.3%'),
   new Fruit('Jeżyna', 2880, 3, 30, 1, '70.5%', '-0.1%'),
@@ -49,5 +49,10 @@ export const fruitFactory = [
   new Fruit('Winogrona', 720, 2, 22.1, 2, '0%', '18%'),
   new Fruit('Śliwki', 14400, 15, 62.4, 4, '20%', '2.5%'),
   new Fruit('Bazylia', 1080, 3, 8.95, 1, '10.3%', '17.9%'),
-    new Fruit( 'Orzech', 20160, 19, 64.40, 4, '80.5%', '2.5%')
+  new Fruit('Orzech', 20160, 19, 64.4, 4, '80.5%', '2.5%'),
+  new Fruit('Lilia', 980, 3, 8, 1, '-0.7%', '12.8%'),
+  new Fruit('Bławatki', 360, 6, 1.90, 1, '9.7%', '12.8%'),
+  new Fruit('Pieczarki', 2880, 5, 32.49, 2, '19.7%', '17.9%'),
+  new Fruit('Orchidea', 5760, 4, 55.00, 1, '19.8%', '12.8%'),
+  new Fruit('Bazylia', 1080, 3, 8.95, 1, '15.8%', '17.9%'),
 ];
