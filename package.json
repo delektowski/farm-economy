@@ -6,7 +6,7 @@
     "firebase": "^7.5.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-scripts": "0.9.x"
+    "react-scripts": "5.0.x"
   },
   "devDependencies": {
     "prettier": "^1.19.1",
